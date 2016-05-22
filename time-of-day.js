@@ -1,7 +1,7 @@
 'use strict'
 
 const Joi = require('joi')
-const ValidationFailedException = require('../../node_modules/rheactor-value-objects/errors').ValidationFailedException
+const ValidationFailedException = require('./errors').ValidationFailedException
 
 const schema = Joi.object().keys({
   timeOfDay: Joi.string().required().regex(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/).lowercase()

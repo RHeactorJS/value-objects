@@ -1,7 +1,7 @@
 'use strict'
 
 const Joi = require('joi')
-const ValidationFailedException = require('../../node_modules/rheactor-value-objects/errors').ValidationFailedException
+const ValidationFailedException = require('./errors').ValidationFailedException
 
 const schema = {
   email: Joi.string().required().email({minDomainAtoms: 2}).lowercase()

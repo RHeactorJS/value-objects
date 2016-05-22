@@ -2,7 +2,7 @@
 
 const _map = require('lodash/map')
 const URIValue = require('..//uri')
-const Errors = require('..//errors')
+const Errors = require('../errors')
 
 /* global describe, it */
 /*eslint no-unused-vars: 0*/

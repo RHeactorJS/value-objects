@@ -2,7 +2,7 @@
 
 const _map = require('lodash/map')
 const EmailValue = require('..//email')
-const Errors = require('..//errors')
+const Errors = require('../errors')
 
 /* global describe, it */
 
