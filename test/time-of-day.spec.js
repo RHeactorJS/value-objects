@@ -1,6 +1,7 @@
 'use strict'
 
 const _map = require('lodash/map')
+const _forIn = require('lodash/forIn')
 const TimeOfDayValue = require('..//time-of-day')
 const Errors = require('../errors')
 
@@ -44,5 +45,39 @@ describe('TimeOfDayValue()', function () {
       }).to.throw(Errors.ValidationFailedException)
     })
     done()
+  })
+
+  describe('.hour()', () => {
+    it('should return the hour as a number', (done) => {
+        _forIn({
+          '01:00': 1,
+          '02:00': 2,
+          '13:00': 13,
+          '1:00': 1,
+          '2:00': 2,
+          '00:00': 0,
+          '0:00': 0
+        }, (hour, time) => {
+          let u = new TimeOfDayValue(time)
+          expect(u.hour()).to.equal(hour)
+        })
+        done()
+      }
+    )
+  })
+
+  describe('.minute()', () => {
+    it('should return the minute as a number', (done) => {
+        _forIn({
+          '01:00': 0,
+          '02:01': 1,
+          '13:59': 59
+        }, (hour, time) => {
+          let u = new TimeOfDayValue(time)
+          expect(u.minute()).to.equal(hour)
+        })
+        done()
+      }
+    )
   })
 })

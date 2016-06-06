@@ -25,4 +25,20 @@ TimeOfDayValue.prototype.toString = function () {
   return this.timeOfDay
 }
 
+/**
+ * Returns the hour of the time as a number
+ * @returns {Number}
+ */
+TimeOfDayValue.prototype.hour = function () {
+  return +this.timeOfDay.split(':')[0]
+}
+
+/**
+ * Returns the minute of the time as a number
+ * @returns {Number}
+ */
+TimeOfDayValue.prototype.minute = function () {
+  return +this.timeOfDay.split(':')[1]
+}
+
 module.exports = TimeOfDayValue
