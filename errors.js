@@ -36,9 +36,10 @@ EntityNotFoundError.prototype.toString = function () {
   return this.message
 }
 
-function EntityDeletedError (message) {
+function EntityDeletedError (message, entity) {
   this.name = 'EntityDeletedError'
   this.message = message
+  Object.defineProperty(this, 'entity', {value: entity})
 }
 
 EntityDeletedError.prototype = Object.create(Error.prototype)
