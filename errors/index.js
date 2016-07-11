@@ -11,6 +11,7 @@ const ApplicationError = require('./application')
 const TokenExpiredError = require('./token-expired')
 const EntityDeletedError = require('./entity-deleted')
 const PermissionDeniedError = require('./permission-denied')
+const PaymentRequiredException = require('./payment-required')
 
 module.exports = {
   ValidationFailedException,
@@ -23,5 +24,6 @@ module.exports = {
   ApplicationError,
   TokenExpiredError,
   EntityDeletedError,
-  PermissionDeniedError
+  PermissionDeniedError,
+  PaymentRequiredException
 }
