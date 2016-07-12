@@ -35,3 +35,16 @@ describe('SlugValue()', function () {
     done()
   })
 })
+
+describe('SlugValue.Type', () => {
+  it('should detect invalid types', (done) => {
+    expect(() => {
+      SlugValue.Type({foo: 'bar'})
+    }).to.throw(TypeError)
+    done()
+  })
+  it('should accept valid types', (done) => {
+    SlugValue.Type(new SlugValue('slug'))
+    done()
+  })
+})

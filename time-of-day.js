@@ -2,6 +2,7 @@
 
 const Joi = require('joi')
 const ValidationFailedException = require('./errors').ValidationFailedException
+const t = require('tcomb')
 
 const schema = Joi.object().keys({
   timeOfDay: Joi.string().required().regex(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/).lowercase()
@@ -40,5 +41,7 @@ TimeOfDayValue.prototype.hour = function () {
 TimeOfDayValue.prototype.minute = function () {
   return +this.timeOfDay.split(':')[1]
 }
+
+TimeOfDayValue.Type = t.irreducible('TimeOfDayValueValue', (x) => x instanceof TimeOfDayValue)
 
 module.exports = TimeOfDayValue

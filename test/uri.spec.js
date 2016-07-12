@@ -33,3 +33,16 @@ describe('URIValue()', function () {
     done()
   })
 })
+
+describe('URIValue.Type', () => {
+  it('should detect invalid types', (done) => {
+    expect(() => {
+      URIValue.Type({foo: 'bar'})
+    }).to.throw(TypeError)
+    done()
+  })
+  it('should accept valid types', (done) => {
+    URIValue.Type(new URIValue('https://example.com'))
+    done()
+  })
+})

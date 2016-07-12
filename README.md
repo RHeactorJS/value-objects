@@ -10,3 +10,7 @@
 [![NPM](https://nodei.co/npm/rheactor-value-objects.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/rheactor-value-objects/)
 
 A collection of value objects
+
+## TODO
+
+- Replace HAPI Joi validation with tcomb validation

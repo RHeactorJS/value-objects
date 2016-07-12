@@ -39,3 +39,16 @@ describe('DomainValue()', function () {
     done()
   })
 })
+
+describe('DomainValue.Type', () => {
+  it('should detect invalid types', (done) => {
+    expect(() => {
+      DomainValue.Type({foo: 'bar'})
+    }).to.throw(TypeError)
+    done()
+  })
+  it('should accept valid types', (done) => {
+    DomainValue.Type(new DomainValue('example.com'))
+    done()
+  })
+})

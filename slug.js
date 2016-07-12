@@ -2,6 +2,7 @@
 
 const Joi = require('joi')
 const ValidationFailedException = require('./errors').ValidationFailedException
+const t = require('tcomb')
 
 const schema = Joi.object().keys({
   slug: Joi.string().required().regex(/^[a-z0-9]+(?!-+$)[a-z0-9-]*$/).lowercase()
@@ -24,5 +25,7 @@ function SlugValue (slug) {
 SlugValue.prototype.toString = function () {
   return this.slug
 }
+
+SlugValue.Type = t.irreducible('SlugValue', (x) => x instanceof SlugValue)
 
 module.exports = SlugValue

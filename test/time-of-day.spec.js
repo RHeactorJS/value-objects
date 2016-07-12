@@ -83,3 +83,16 @@ describe('TimeOfDayValue()', function () {
     })
   })
 })
+
+describe('TimeOfDayValue.Type', () => {
+  it('should detect invalid types', (done) => {
+    expect(() => {
+      TimeOfDayValue.Type({foo: 'bar'})
+    }).to.throw(TypeError)
+    done()
+  })
+  it('should accept valid types', (done) => {
+    TimeOfDayValue.Type(new TimeOfDayValue('01:00'))
+    done()
+  })
+})

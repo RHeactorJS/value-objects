@@ -2,6 +2,7 @@
 
 const Joi = require('joi')
 const ValidationFailedException = require('./errors').ValidationFailedException
+const t = require('tcomb')
 
 const schema = Joi.object().keys({
   email: Joi.string().email({minDomainAtoms: 2}).lowercase().required()
@@ -24,5 +25,7 @@ function EmailValue (email) {
 EmailValue.prototype.toString = function () {
   return this.email
 }
+
+EmailValue.Type = t.irreducible('EmailValue', (x) => x instanceof EmailValue)
 
 module.exports = EmailValue

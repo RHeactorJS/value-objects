@@ -33,3 +33,16 @@ describe('EmailValue()', function () {
     done()
   })
 })
+
+describe('EmailValue.Type', () => {
+  it('should detect invalid types', (done) => {
+    expect(() => {
+      EmailValue.Type({foo: 'bar'})
+    }).to.throw(TypeError)
+    done()
+  })
+  it('should accept valid types', (done) => {
+    EmailValue.Type(new EmailValue('john@example.com'))
+    done()
+  })
+})
