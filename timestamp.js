@@ -35,6 +35,6 @@ TimestampValue.prototype.valueOf = function () {
   return this.timestamp
 }
 
-TimestampValue.Type = t.irreducible('TimestampValue', (x) => x instanceof TimestampValue)
+TimestampValue.Type = t.irreducible('TimestampValue', (x) => x.constructor.name === TimestampValue.name)
 
 module.exports = TimestampValue

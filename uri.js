@@ -25,6 +25,6 @@ URIValue.is = (uri) => {
   return !r.error
 }
 
-URIValue.Type = t.irreducible('URIValue', (x) => x instanceof URIValue)
+URIValue.Type = t.irreducible('URIValue', (x) => x.constructor.name === URIValue.name)
 
 module.exports = URIValue

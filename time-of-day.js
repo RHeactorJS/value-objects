@@ -42,6 +42,6 @@ TimeOfDayValue.prototype.minute = function () {
   return +this.timeOfDay.split(':')[1]
 }
 
-TimeOfDayValue.Type = t.irreducible('TimeOfDayValueValue', (x) => x instanceof TimeOfDayValue)
+TimeOfDayValue.Type = t.irreducible('TimeOfDayValueValue', (x) => x.constructor.name === TimeOfDayValue.name)
 
 module.exports = TimeOfDayValue

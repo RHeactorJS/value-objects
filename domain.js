@@ -29,6 +29,6 @@ DomainValue.prototype.toString = function () {
   return this.domain
 }
 
-DomainValue.Type = t.irreducible('DomainValue', (x) => x instanceof DomainValue)
+DomainValue.Type = t.irreducible('DomainValue', (x) => x.constructor.name === DomainValue.name)
 
 module.exports = DomainValue

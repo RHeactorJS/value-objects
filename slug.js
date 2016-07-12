@@ -26,6 +26,6 @@ SlugValue.prototype.toString = function () {
   return this.slug
 }
 
-SlugValue.Type = t.irreducible('SlugValue', (x) => x instanceof SlugValue)
+SlugValue.Type = t.irreducible('SlugValue', (x) => x.constructor.name === SlugValue.name)
 
 module.exports = SlugValue

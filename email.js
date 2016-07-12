@@ -26,6 +26,6 @@ EmailValue.prototype.toString = function () {
   return this.email
 }
 
-EmailValue.Type = t.irreducible('EmailValue', (x) => x instanceof EmailValue)
+EmailValue.Type = t.irreducible('EmailValue', (x) => x.constructor.name === EmailValue.name)
 
 module.exports = EmailValue

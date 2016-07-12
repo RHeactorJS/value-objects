@@ -11,6 +11,24 @@
 
 A collection of value objects
 
+## Common API
+
+### .Type()
+
+This method exposes a [tcomb](https://github.com/gcanti/tcomb) type validation base on the **name of the type**.
+
+Note that instanceof can't be used because having this check will return false, because the application using
+the value-objects package will create an instance that Node.js thinks to be from a different location that the
+one referenced in this package's `uri.js`
+
+    # app.js
+    const URIValue = require('rheactor-value-objects/uri')
+    let u = new URIValue(…)
+    URIValue.Type(u) // will fail
+    
+    # uri.js
+    URIValue.Type = t.irreducible('URIValue', (x) => x instanceof URIValue)
+
 ## TODO
 
 - Replace HAPI Joi validation with tcomb validation
