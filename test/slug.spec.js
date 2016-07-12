@@ -38,9 +38,15 @@ describe('SlugValue()', function () {
 
 describe('SlugValue.Type', () => {
   it('should detect invalid types', (done) => {
-    expect(() => {
-      SlugValue.Type({foo: 'bar'})
-    }).to.throw(TypeError)
+    _map([
+      {foo: 'bar'},
+      null,
+      undefined
+    ], (v) => {
+      expect(() => {
+        SlugValue.Type(v)
+      }).to.throw(TypeError)
+    })
     done()
   })
   it('should accept valid types', (done) => {

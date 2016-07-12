@@ -57,9 +57,15 @@ describe('TimestampValue.valueOf()', () => {
 
 describe('TimestampValue.Type', () => {
   it('should detect invalid types', (done) => {
-    expect(() => {
-      TimestampValue.Type({foo: 'bar'})
-    }).to.throw(TypeError)
+    _map([
+      {foo: 'bar'},
+      null,
+      undefined
+    ], (v) => {
+      expect(() => {
+        TimestampValue.Type(v)
+      }).to.throw(TypeError)
+    })
     done()
   })
   it('should accept valid types', (done) => {

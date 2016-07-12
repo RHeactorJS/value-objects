@@ -36,9 +36,15 @@ describe('URIValue()', function () {
 
 describe('URIValue.Type', () => {
   it('should detect invalid types', (done) => {
-    expect(() => {
-      URIValue.Type({foo: 'bar'})
-    }).to.throw(TypeError)
+    _map([
+      {foo: 'bar'},
+      null,
+      undefined
+    ], (v) => {
+      expect(() => {
+        URIValue.Type(v)
+      }).to.throw(TypeError)
+    })
     done()
   })
   it('should accept valid types', (done) => {

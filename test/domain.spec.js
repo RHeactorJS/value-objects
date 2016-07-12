@@ -42,9 +42,15 @@ describe('DomainValue()', function () {
 
 describe('DomainValue.Type', () => {
   it('should detect invalid types', (done) => {
-    expect(() => {
-      DomainValue.Type({foo: 'bar'})
-    }).to.throw(TypeError)
+    _map([
+      {foo: 'bar'},
+      null,
+      undefined
+    ], (v) => {
+      expect(() => {
+        DomainValue.Type(v)
+      }).to.throw(TypeError)
+    })
     done()
   })
   it('should accept valid types', (done) => {

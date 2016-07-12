@@ -36,9 +36,15 @@ describe('EmailValue()', function () {
 
 describe('EmailValue.Type', () => {
   it('should detect invalid types', (done) => {
-    expect(() => {
-      EmailValue.Type({foo: 'bar'})
-    }).to.throw(TypeError)
+    _map([
+      {foo: 'bar'},
+      null,
+      undefined
+    ], (v) => {
+      expect(() => {
+        EmailValue.Type(v)
+      }).to.throw(TypeError)
+    })
     done()
   })
   it('should accept valid types', (done) => {

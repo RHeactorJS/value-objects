@@ -86,9 +86,15 @@ describe('TimeOfDayValue()', function () {
 
 describe('TimeOfDayValue.Type', () => {
   it('should detect invalid types', (done) => {
-    expect(() => {
-      TimeOfDayValue.Type({foo: 'bar'})
-    }).to.throw(TypeError)
+    _map([
+      {foo: 'bar'},
+      null,
+      undefined
+    ], (v) => {
+      expect(() => {
+        TimeOfDayValue.Type(v)
+      }).to.throw(TypeError)
+    })
     done()
   })
   it('should accept valid types', (done) => {
