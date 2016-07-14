@@ -12,4 +12,6 @@ EntityDeletedError.prototype.toString = function () {
   return this.message
 }
 
+EntityDeletedError.is = err => err instanceof Error && err.name === EntityDeletedError.name
+
 module.exports = EntityDeletedError

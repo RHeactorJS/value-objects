@@ -11,4 +11,6 @@ PaymentRequiredException.prototype.toString = function () {
   return this.message
 }
 
+PaymentRequiredException.is = err => err instanceof Error && err.name === PaymentRequiredException.name
+
 module.exports = PaymentRequiredException

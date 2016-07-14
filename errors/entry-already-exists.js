@@ -11,4 +11,6 @@ EntryAlreadyExistsError.prototype.toString = function () {
   return this.message
 }
 
+EntryAlreadyExistsError.is = err => err instanceof Error && err.name === EntryAlreadyExistsError.name
+
 module.exports = EntryAlreadyExistsError

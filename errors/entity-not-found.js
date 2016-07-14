@@ -11,4 +11,6 @@ EntityNotFoundError.prototype.toString = function () {
   return this.message
 }
 
+EntityNotFoundError.is = err => err instanceof Error && err.name === EntityNotFoundError.name
+
 module.exports = EntityNotFoundError

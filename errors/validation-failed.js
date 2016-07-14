@@ -25,4 +25,6 @@ ValidationFailedException.prototype.toString = function () {
   return message
 }
 
+ValidationFailedException.is = err => err instanceof Error && err.name === ValidationFailedException.name
+
 module.exports = ValidationFailedException

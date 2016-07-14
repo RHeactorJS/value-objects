@@ -11,4 +11,6 @@ UnauthorizedError.prototype.toString = function () {
   return this.message
 }
 
+UnauthorizedError.is = err => err instanceof Error && err.name === UnauthorizedError.name
+
 module.exports = UnauthorizedError

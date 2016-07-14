@@ -11,4 +11,6 @@ UnhandledDomainEvent.prototype.toString = function () {
   return this.message + ' (' + this.name + ')'
 }
 
+UnhandledDomainEvent.is = err => err instanceof Error && err.name === UnhandledDomainEvent.name
+
 module.exports = UnhandledDomainEvent

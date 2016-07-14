@@ -10,4 +10,6 @@ ConflictError.prototype.toString = function () {
   return this.message
 }
 
+ConflictError.is = err => err instanceof Error && err.name === ConflictError.name
+
 module.exports = ConflictError

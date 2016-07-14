@@ -11,4 +11,6 @@ ApplicationError.prototype.toString = function () {
   return this.message
 }
 
+ApplicationError.is = err => err instanceof Error && err.name === ApplicationError.name
+
 module.exports = ApplicationError

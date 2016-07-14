@@ -15,4 +15,6 @@ AccessDeniedError.prototype.toString = function () {
   return msg
 }
 
+AccessDeniedError.is = err => err instanceof Error && err.name === AccessDeniedError.name
+
 module.exports = AccessDeniedError

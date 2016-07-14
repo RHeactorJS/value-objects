@@ -10,4 +10,6 @@ PermissionDeniedError.prototype.toString = function () {
   return this.message
 }
 
+PermissionDeniedError.is = err => err instanceof Error && err.name === PermissionDeniedError.name
+
 module.exports = PermissionDeniedError

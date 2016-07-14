@@ -12,4 +12,6 @@ TokenExpiredError.prototype.toString = function () {
   return this.message
 }
 
+TokenExpiredError.is = err => err instanceof Error && err.name === TokenExpiredError.name
+
 module.exports = TokenExpiredError
