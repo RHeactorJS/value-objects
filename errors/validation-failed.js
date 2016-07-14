@@ -2,16 +2,16 @@
 
 const _map = require('lodash/map')
 
-function ValidationFailedException (message, data, error) {
-  this.name = 'ValidationFailedException'
+function ValidationFailedError (message, data, error) {
+  this.name = 'ValidationFailedError'
   this.message = message
   this.data = data
   this.error = error
 }
 
-ValidationFailedException.prototype = Object.create(Error.prototype)
-ValidationFailedException.prototype.constructor = ValidationFailedException
-ValidationFailedException.prototype.toString = function () {
+ValidationFailedError.prototype = Object.create(Error.prototype)
+ValidationFailedError.prototype.constructor = ValidationFailedError
+ValidationFailedError.prototype.toString = function () {
   let message = this.message
   if (this.error && this.error.isJoi) {
     message += ' (' +
@@ -25,6 +25,6 @@ ValidationFailedException.prototype.toString = function () {
   return message
 }
 
-ValidationFailedException.is = err => err instanceof Error && err.name === ValidationFailedException.name
+ValidationFailedError.is = err => err instanceof Error && err.name === ValidationFailedError.name
 
-module.exports = ValidationFailedException
+module.exports = ValidationFailedError

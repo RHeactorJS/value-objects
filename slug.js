@@ -1,7 +1,7 @@
 'use strict'
 
 const Joi = require('joi')
-const ValidationFailedException = require('./errors').ValidationFailedException
+const ValidationFailedError = require('./errors/validation-failed')
 const t = require('tcomb')
 
 const schema = Joi.object().keys({
@@ -16,7 +16,7 @@ const schema = Joi.object().keys({
 function SlugValue (slug) {
   Joi.validate({slug}, schema, (err, data) => {
     if (err) {
-      throw new ValidationFailedException('Not a slug: ' + slug, data, err)
+      throw new ValidationFailedError('Not a slug: ' + slug, data, err)
     }
   })
   this.slug = slug

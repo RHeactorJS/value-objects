@@ -2,8 +2,8 @@
 
 const _map = require('lodash/map')
 const _forIn = require('lodash/forIn')
-const TimeOfDayValue = require('..//time-of-day')
-const Errors = require('../errors')
+const TimeOfDayValue = require('../time-of-day')
+const ValidationFailedError = require('../errors/validation-failed')
 
 /* global describe, it */
 /*eslint no-unused-vars: 0*/
@@ -42,7 +42,7 @@ describe('TimeOfDayValue()', function () {
     ], (time) => {
       expect(() => {
         let u = new TimeOfDayValue(time)
-      }).to.throw(Errors.ValidationFailedException)
+      }).to.throw(ValidationFailedError)
     })
     done()
   })

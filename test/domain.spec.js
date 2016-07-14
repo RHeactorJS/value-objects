@@ -1,8 +1,8 @@
 'use strict'
 
 const _map = require('lodash/map')
-const DomainValue = require('..//domain')
-const Errors = require('../errors')
+const DomainValue = require('../domain')
+const ValidationFailedError = require('../errors/validation-failed')
 
 /* global describe, it */
 
@@ -34,7 +34,7 @@ describe('DomainValue()', function () {
     ], (domain) => {
       expect(() => {
         DomainValue(domain)
-      }).to.throw(Errors.ValidationFailedException)
+      }).to.throw(ValidationFailedError)
     })
     done()
   })

@@ -1,7 +1,7 @@
 'use strict'
 
 const Joi = require('joi')
-const ValidationFailedException = require('./errors').ValidationFailedException
+const ValidationFailedError = require('./errors/validation-failed')
 const t = require('tcomb')
 
 /**
@@ -11,7 +11,7 @@ const t = require('tcomb')
  */
 function URIValue (uri) {
   if (!URIValue.is(uri)) {
-    throw new ValidationFailedException('Not an URI: ' + uri, {uri})
+    throw new ValidationFailedError('Not an URI: ' + uri, {uri})
   }
   this.uri = uri
 }
