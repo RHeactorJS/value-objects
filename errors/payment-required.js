@@ -1,16 +1,16 @@
 'use strict'
 
-function PaymentRequiredException (message) {
-  this.name = 'PaymentRequiredException'
+function PaymentRequiredError (message) {
+  this.name = 'PaymentRequiredError'
   this.message = message
 }
 
-PaymentRequiredException.prototype = Object.create(Error.prototype)
-PaymentRequiredException.prototype.constructor = PaymentRequiredException
-PaymentRequiredException.prototype.toString = function () {
+PaymentRequiredError.prototype = Object.create(Error.prototype)
+PaymentRequiredError.prototype.constructor = PaymentRequiredError
+PaymentRequiredError.prototype.toString = function () {
   return this.message
 }
 
-PaymentRequiredException.is = err => err instanceof Error && err.name === PaymentRequiredException.name
+PaymentRequiredError.is = err => err instanceof Error && err.name === PaymentRequiredError.name
 
-module.exports = PaymentRequiredException
+module.exports = PaymentRequiredError
