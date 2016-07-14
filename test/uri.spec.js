@@ -1,8 +1,8 @@
 'use strict'
 
 const _map = require('lodash/map')
-const URIValue = require('..//uri')
-const Errors = require('../errors')
+const URIValue = require('../uri')
+const ValidationFailedError = require('../errors/validation-failed')
 
 /* global describe, it */
 /*eslint no-unused-vars: 0*/
@@ -28,7 +28,7 @@ describe('URIValue()', function () {
     ], (uri) => {
       expect(() => {
         let u = new URIValue(uri)
-      }).to.throw(Errors.ValidationFailedException)
+      }).to.throw(ValidationFailedError)
     })
     done()
   })

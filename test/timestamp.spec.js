@@ -2,7 +2,7 @@
 
 const _map = require('lodash/map')
 const TimestampValue = require('../timestamp')
-const Errors = require('../errors')
+const ValidationFailedError = require('../errors/validation-failed')
 
 /* global describe, it */
 /*eslint no-unused-vars: 0*/
@@ -25,7 +25,7 @@ describe('TimestampValue()', () => {
   it('should not parse invalid timestamps', (done) => {
     expect(() => {
       let u = new TimestampValue('bogus')
-    }).to.throw(Errors.ValidationFailedException)
+    }).to.throw(ValidationFailedError)
     done()
   })
 

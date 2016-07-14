@@ -2,7 +2,7 @@
 
 const t = require('tcomb')
 const Integer = t.refinement(t.Number, (n) => n % 1 === 0, 'Integer')
-const ValidationFailedException = require('./errors').ValidationFailedException
+const ValidationFailedError = require('./errors/validation-failed')
 
 /**
  * @param {Number} timestamp
@@ -16,7 +16,7 @@ function TimestampValue (timestamp) {
   try {
     Integer(timestamp)
   } catch (e) {
-    throw new ValidationFailedException('Not a timestamp: ' + timestamp, timestamp, e)
+    throw new ValidationFailedError('Not a timestamp: ' + timestamp, timestamp, e)
   }
   this.timestamp = timestamp
 }

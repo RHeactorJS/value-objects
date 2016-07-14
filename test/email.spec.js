@@ -1,8 +1,8 @@
 'use strict'
 
 const _map = require('lodash/map')
-const EmailValue = require('..//email')
-const Errors = require('../errors')
+const EmailValue = require('../email')
+const ValidationFailedError = require('../errors/validation-failed')
 
 /* global describe, it */
 
@@ -28,7 +28,7 @@ describe('EmailValue()', function () {
     ], (email) => {
       expect(() => {
         EmailValue(email)
-      }).to.throw(Errors.ValidationFailedException)
+      }).to.throw(ValidationFailedError)
     })
     done()
   })

@@ -1,16 +1,16 @@
 'use strict'
 
-function EntityNotFoundError (message) {
-  this.name = 'EntityNotFoundError'
+function EntryNotFoundError (message) {
+  this.name = 'EntryNotFoundError'
   this.message = message
 }
 
-EntityNotFoundError.prototype = Object.create(Error.prototype)
-EntityNotFoundError.prototype.constructor = EntityNotFoundError
-EntityNotFoundError.prototype.toString = function () {
+EntryNotFoundError.prototype = Object.create(Error.prototype)
+EntryNotFoundError.prototype.constructor = EntryNotFoundError
+EntryNotFoundError.prototype.toString = function () {
   return this.message
 }
 
-EntityNotFoundError.is = err => err instanceof Error && err.name === EntityNotFoundError.name
+EntryNotFoundError.is = err => err instanceof Error && err.name === EntryNotFoundError.name
 
-module.exports = EntityNotFoundError
+module.exports = EntryNotFoundError

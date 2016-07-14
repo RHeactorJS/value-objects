@@ -1,17 +1,17 @@
 'use strict'
 
-function EntityDeletedError (message, entity) {
-  this.name = 'EntityDeletedError'
+function EntryDeletedError (message, entry) {
+  this.name = 'EntryDeletedError'
   this.message = message
-  Object.defineProperty(this, 'entity', {value: entity})
+  Object.defineProperty(this, 'entry', {value: entry})
 }
 
-EntityDeletedError.prototype = Object.create(Error.prototype)
-EntityDeletedError.prototype.constructor = EntityDeletedError
-EntityDeletedError.prototype.toString = function () {
+EntryDeletedError.prototype = Object.create(Error.prototype)
+EntryDeletedError.prototype.constructor = EntryDeletedError
+EntryDeletedError.prototype.toString = function () {
   return this.message
 }
 
-EntityDeletedError.is = err => err instanceof Error && err.name === EntityDeletedError.name
+EntryDeletedError.is = err => err instanceof Error && err.name === EntryDeletedError.name
 
-module.exports = EntityDeletedError
+module.exports = EntryDeletedError

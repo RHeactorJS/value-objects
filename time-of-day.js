@@ -1,7 +1,7 @@
 'use strict'
 
 const Joi = require('joi')
-const ValidationFailedException = require('./errors').ValidationFailedException
+const ValidationFailedError = require('./errors/validation-failed')
 const t = require('tcomb')
 
 const schema = Joi.object().keys({
@@ -16,7 +16,7 @@ const schema = Joi.object().keys({
 function TimeOfDayValue (timeOfDay) {
   Joi.validate({timeOfDay}, schema, (err, data) => {
     if (err) {
-      throw new ValidationFailedException('Not a timeOfDay: ' + timeOfDay, data, err)
+      throw new ValidationFailedError('Not a timeOfDay: ' + timeOfDay, data, err)
     }
   })
   this.timeOfDay = timeOfDay
