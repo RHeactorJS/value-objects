@@ -6,7 +6,7 @@ const TimeOfDayValue = require('../time-of-day')
 const ValidationFailedError = require('../errors/validation-failed')
 
 /* global describe, it */
-/*eslint no-unused-vars: 0*/
+/* eslint no-unused-vars: 0 */
 
 const expect = require('chai').expect
 
