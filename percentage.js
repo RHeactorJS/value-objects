@@ -20,8 +20,6 @@ function PercentageValue (percentage) {
   }
   percentage = parseFloat(percentage)
   if (isNaN(percentage)) throw new ValidationFailedError('Not a percentage: ' + percentage, percentage)
-  if (percentage < 0) throw new ValidationFailedError('Negative values are not allowed: ' + percentage, percentage)
-  if (percentage > 100) throw new ValidationFailedError('Not a percentage: ' + percentage, percentage)
   this.percentage = percentage
 }
 

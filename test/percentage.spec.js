@@ -16,14 +16,18 @@ describe('PercentageValue()', () => {
     map((data) => {
       let u = new PercentageValue(data[0])
       expect(u.toString()).to.equal(data[1])
+      expect(u.valueOf()).to.equal(typeof data[2] !== 'undefined' ? data[2] : data[0])
     })(
       [
         [0, '0%'],
         [50, '50%'],
         [33.3, '33%'],
         [100, '100%'],
-        ['0', '0%'],
-        ['100', '100%']
+        ['0', '0%', 0],
+        ['100', '100%', 100],
+        [-1, '-1%'],
+        [101, '101%'],
+        [-100, '-100%']
       ]
     )
   })
@@ -31,9 +35,7 @@ describe('PercentageValue()', () => {
   it('should not parse invalid percentages', () => {
     _map([
       'bogus',
-      -1,
-      101,
-      -100
+      ''
     ], (v) => {
       expect(() => {
         let u = new PercentageValue(v)
