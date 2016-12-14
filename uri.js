@@ -3,6 +3,7 @@
 const Joi = require('joi')
 const ValidationFailedError = require('./errors/validation-failed')
 const t = require('tcomb')
+const trimEnd = require('lodash/trimEnd')
 
 /**
  * @param {String} uri
@@ -18,6 +19,14 @@ function URIValue (uri) {
 
 URIValue.prototype.toString = function () {
   return this.uri
+}
+
+/**
+ * Returns a copy of the instance that has no trailing slash
+ * @returns {String|*}
+ */
+URIValue.prototype.slashless = function () {
+  return new URIValue(trimEnd(this.uri, '/'))
 }
 
 URIValue.is = (uri) => {

@@ -32,6 +32,12 @@ describe('URIValue()', function () {
     })
     done()
   })
+  describe('slashless()', () => {
+    it('should return a copy with out a slash', () => {
+      expect((new URIValue('https://example.com/')).slashless().toString()).to.equal('https://example.com')
+      expect((new URIValue('https://example.com')).slashless().toString()).to.equal('https://example.com')
+    })
+  })
 })
 
 describe('URIValue.Type', () => {
