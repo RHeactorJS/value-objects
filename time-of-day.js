@@ -42,6 +42,15 @@ TimeOfDayValue.prototype.minute = function () {
   return +this.timeOfDay.split(':')[1]
 }
 
+/**
+ * @param {TimeOfDayValue} timeOfDay
+ * @returns {boolean}
+ */
+TimeOfDayValue.prototype.equals = function (timeOfDay) {
+  TimeOfDayValue.Type(timeOfDay)
+  return this.timeOfDay === timeOfDay.toString()
+}
+
 TimeOfDayValue.Type = t.irreducible('TimeOfDayValueValue', (x) => x.constructor.name === TimeOfDayValue.name)
 
 module.exports = TimeOfDayValue

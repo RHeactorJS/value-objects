@@ -26,6 +26,15 @@ SlugValue.prototype.toString = function () {
   return this.slug
 }
 
+/**
+ * @param {SlugValue} slug
+ * @returns {boolean}
+ */
+SlugValue.prototype.equals = function (slug) {
+  SlugValue.Type(slug)
+  return this.slug === slug.toString()
+}
+
 SlugValue.Type = t.irreducible('SlugValue', (x) => x.constructor.name === SlugValue.name)
 
 module.exports = SlugValue

@@ -29,6 +29,15 @@ DomainValue.prototype.toString = function () {
   return this.domain
 }
 
+/**
+ * @param {DomainValue} domain
+ * @returns {boolean}
+ */
+DomainValue.prototype.equals = function (domain) {
+  DomainValue.Type(domain)
+  return this.domain === domain.toString()
+}
+
 DomainValue.Type = t.irreducible('DomainValue', (x) => x.constructor.name === DomainValue.name)
 
 module.exports = DomainValue

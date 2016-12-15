@@ -26,6 +26,15 @@ EmailValue.prototype.toString = function () {
   return this.email
 }
 
+/**
+ * @param {EmailValue} email
+ * @returns {boolean}
+ */
+EmailValue.prototype.equals = function (email) {
+  EmailValue.Type(email)
+  return this.email === email.toString()
+}
+
 EmailValue.Type = t.irreducible('EmailValue', (x) => x.constructor.name === EmailValue.name)
 
 module.exports = EmailValue

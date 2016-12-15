@@ -35,6 +35,15 @@ TimestampValue.prototype.valueOf = function () {
   return this.timestamp
 }
 
+/**
+ * @param {TimestampValue} timestamp
+ * @returns {boolean}
+ */
+TimestampValue.prototype.equals = function (timestamp) {
+  TimestampValue.Type(timestamp)
+  return this.timestamp === timestamp.valueOf()
+}
+
 TimestampValue.Type = t.irreducible('TimestampValue', (x) => x.constructor.name === TimestampValue.name)
 
 module.exports = TimestampValue

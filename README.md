@@ -28,7 +28,16 @@ one referenced in this package's `uri.js`
     
     # uri.js
     URIValue.Type = t.irreducible('URIValue', (x) => x instanceof URIValue)
+  
+## .equals()
 
+You can compare two value objects with the `.equals()` method:
+
+```javascript
+const ex = new URIValue('https://example.com') 
+ex.equals(new URIValue('https://example.com')) // -> true
+ex.equals(new URIValue('https://acme.com'))    // -> false
+```
 ## TODO
 
 - Replace HAPI Joi validation with tcomb validation

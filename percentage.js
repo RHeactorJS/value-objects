@@ -37,6 +37,15 @@ PercentageValue.prototype.valueOf = function () {
   return this.percentage
 }
 
+/**
+ * @param {PercentageValue} percentage
+ * @returns {boolean}
+ */
+PercentageValue.prototype.equals = function (percentage) {
+  PercentageValue.Type(percentage)
+  return this.percentage === percentage.valueOf()
+}
+
 PercentageValue.Type = t.irreducible('PercentageValue', (x) => x.constructor.name === PercentageValue.name)
 
 PercentageValue.is = o => o.constructor.name === PercentageValue.name

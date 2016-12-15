@@ -22,6 +22,15 @@ URIValue.prototype.toString = function () {
 }
 
 /**
+ * @param {URIValue} uri
+ * @returns {boolean}
+ */
+URIValue.prototype.equals = function (uri) {
+  URIValue.Type(uri)
+  return this.uri.toString() === uri.toString()
+}
+
+/**
  * Returns a copy of the instance that has no trailing slash
  * @returns {String|*}
  */

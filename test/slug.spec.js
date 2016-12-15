@@ -8,49 +8,60 @@ const ValidationFailedError = require('../errors/validation-failed')
 
 const expect = require('chai').expect
 
-describe('SlugValue()', function () {
-  it('should parse a slug', (done) => {
-    _map([
-      'some-slug',
-      'short'
-    ], (slug) => {
-      let d = new SlugValue(slug)
-      expect(d.toString()).to.equal(slug)
+describe('SlugValue', () => {
+  describe('constructor()', function () {
+    it('should parse a slug', (done) => {
+      _map([
+        'some-slug',
+        'short'
+      ], (slug) => {
+        let d = new SlugValue(slug)
+        expect(d.toString()).to.equal(slug)
+      })
+      done()
     })
-    done()
+
+    it('should not parse invalid slugs', (done) => {
+      _map([
+        'not a slug',
+        'a-',         //  trailing dash
+        'a--',        //  trailing dash
+        '-a',         //  leading dash
+        '--a'         //  leading dash
+      ], (slug) => {
+        expect(() => {
+          SlugValue(slug)
+        }).to.throw(ValidationFailedError)
+      })
+      done()
+    })
   })
 
-  it('should not parse invalid slugs', (done) => {
-    _map([
-      'not a slug',
-      'a-',         //  trailing dash
-      'a--',        //  trailing dash
-      '-a',         //  leading dash
-      '--a'         //  leading dash
-    ], (slug) => {
-      expect(() => {
-        SlugValue(slug)
-      }).to.throw(ValidationFailedError)
+  describe('.Type', () => {
+    it('should detect invalid types', (done) => {
+      _map([
+        {foo: 'bar'},
+        null,
+        undefined
+      ], (v) => {
+        expect(() => {
+          SlugValue.Type(v)
+        }).to.throw(TypeError)
+      })
+      done()
     })
-    done()
+    it('should accept valid types', (done) => {
+      SlugValue.Type(new SlugValue('slug'))
+      done()
+    })
   })
-})
 
-describe('SlugValue.Type', () => {
-  it('should detect invalid types', (done) => {
-    _map([
-      {foo: 'bar'},
-      null,
-      undefined
-    ], (v) => {
-      expect(() => {
-        SlugValue.Type(v)
-      }).to.throw(TypeError)
+  describe('.equals()', () => {
+    it('should return true for the same slugs', () => {
+      expect(new SlugValue('some-slug').equals(new SlugValue('some-slug'))).to.equal(true)
     })
-    done()
-  })
-  it('should accept valid types', (done) => {
-    SlugValue.Type(new SlugValue('slug'))
-    done()
+    it('should return false for different slugs', () => {
+      expect(new SlugValue('some-slug').equals(new SlugValue('some-other-slug'))).to.equal(false)
+    })
   })
 })
