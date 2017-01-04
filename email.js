@@ -1,12 +1,7 @@
 'use strict'
 
-const Joi = require('joi')
 const ValidationFailedError = require('./errors/validation-failed')
 const t = require('tcomb')
-
-const schema = Joi.object().keys({
-  email: Joi.string().email({minDomainAtoms: 2}).lowercase().required()
-})
 
 /**
  * @param {String} email
@@ -14,12 +9,12 @@ const schema = Joi.object().keys({
  * @throws ValidationFailedException if the creation fails due to invalid data
  */
 function EmailValue (email) {
-  Joi.validate({email}, schema, (err, data) => {
-    if (err) {
-      throw new ValidationFailedError('Not an email: ' + email, data, err)
-    }
-    this.email = data.email
-  })
+  email = email.toLowerCase()
+  // http://emailregex.com/
+  if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
+    throw new ValidationFailedError('Not an email: ' + email)
+  }
+  this.email = email
 }
 
 EmailValue.prototype.toString = function () {

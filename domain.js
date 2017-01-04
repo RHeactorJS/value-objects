@@ -1,12 +1,7 @@
 'use strict'
 
-const Joi = require('joi')
 const ValidationFailedError = require('./errors/validation-failed')
 const t = require('tcomb')
-
-const schema = {
-  email: Joi.string().required().email({minDomainAtoms: 2}).lowercase()
-}
 
 /**
  * A second level domain
@@ -16,13 +11,14 @@ const schema = {
  * @throws ValidationFailedException if the creation fails due to invalid data
  */
 function DomainValue (domain) {
-  let email = 'dummy@' + domain
-  Joi.validate({email}, schema, (err, data) => {
-    if (err || domain.split('.').length !== 2) {
-      throw new ValidationFailedError('Not a domain: ' + domain, data, err)
-    }
-    this.domain = data.email.replace('dummy@', '')
-  })
+  // http://stackoverflow.com/a/30007882
+  if (!/^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$/.test(domain)) {
+    throw new ValidationFailedError('Not a domain: ' + domain)
+  }
+  if (domain.split('.').length !== 2) {
+    throw new ValidationFailedError('Only second level domains are allowed')
+  }
+  this.domain = domain
 }
 
 DomainValue.prototype.toString = function () {

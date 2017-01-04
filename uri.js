@@ -1,6 +1,5 @@
 'use strict'
 
-const Joi = require('joi')
 const ValidationFailedError = require('./errors/validation-failed')
 const t = require('tcomb')
 const trimEnd = require('lodash/trimEnd')
@@ -39,8 +38,7 @@ URIValue.prototype.slashless = function () {
 }
 
 URIValue.is = (uri) => {
-  let r = Joi.validate(uri, Joi.string().uri({scheme: ['https', 'http']}).lowercase().required())
-  return !r.error
+  return /^https?:\/\//.test(uri)
 }
 
 URIValue.Type = t.irreducible('URIValue', (x) => x.constructor.name === URIValue.name)

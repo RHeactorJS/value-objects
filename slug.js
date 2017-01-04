@@ -1,12 +1,7 @@
 'use strict'
 
-const Joi = require('joi')
 const ValidationFailedError = require('./errors/validation-failed')
 const t = require('tcomb')
-
-const schema = Joi.object().keys({
-  slug: Joi.string().required().regex(/^[a-z0-9]+(?!-+$)[a-z0-9-]*$/).lowercase()
-})
 
 /**
  * @param {String} slug
@@ -14,11 +9,10 @@ const schema = Joi.object().keys({
  * @throws ValidationFailedException if the creation fails due to invalid data
  */
 function SlugValue (slug) {
-  Joi.validate({slug}, schema, (err, data) => {
-    if (err) {
-      throw new ValidationFailedError('Not a slug: ' + slug, data, err)
-    }
-  })
+  slug = slug.toLowerCase()
+  if (!/^[a-z0-9]+(?!-+$)[a-z0-9-]*$/.test(slug)) {
+    throw new ValidationFailedError('Not a slug: ' + slug)
+  }
   this.slug = slug
 }
 

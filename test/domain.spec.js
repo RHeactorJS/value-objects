@@ -35,7 +35,7 @@ describe('DomainValue', () => {
       ], (domain) => {
         expect(() => {
           DomainValue(domain)
-        }).to.throw(ValidationFailedError)
+        }, `It should not parse ${domain} as a domain`).to.throw(ValidationFailedError)
       })
       done()
     })

@@ -38,6 +38,3 @@ const ex = new URIValue('https://example.com')
 ex.equals(new URIValue('https://example.com')) // -> true
 ex.equals(new URIValue('https://acme.com'))    // -> false
 ```
-## TODO
-
-- Replace HAPI Joi validation with tcomb validation
