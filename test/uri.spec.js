@@ -1,8 +1,8 @@
 'use strict'
 
 const _map = require('lodash/map')
-const URIValue = require('../uri')
-const ValidationFailedError = require('../errors/validation-failed')
+const URIValue = require('../src/uri')
+const ValidationFailedError = require('../src/errors/validation-failed')
 
 /* global describe, it */
 /* eslint no-unused-vars: 0 */

@@ -1,8 +1,8 @@
 'use strict'
 
 const _map = require('lodash/map')
-const EmailValue = require('../email')
-const ValidationFailedError = require('../errors/validation-failed')
+const EmailValue = require('../src/email')
+const ValidationFailedError = require('../src/errors/validation-failed')
 
 /* global describe, it */
 

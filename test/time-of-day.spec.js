@@ -2,8 +2,8 @@
 
 const _map = require('lodash/map')
 const _forIn = require('lodash/forIn')
-const TimeOfDayValue = require('../time-of-day')
-const ValidationFailedError = require('../errors/validation-failed')
+const TimeOfDayValue = require('../src/time-of-day')
+const ValidationFailedError = require('../src/errors/validation-failed')
 
 /* global describe, it */
 /* eslint no-unused-vars: 0 */

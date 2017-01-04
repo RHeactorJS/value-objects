@@ -3,8 +3,8 @@
 const _map = require('lodash/map')
 const map = require('lodash/fp/map')
 const forEach = require('lodash/fp/forEach')
-const PercentageValue = require('../percentage')
-const ValidationFailedError = require('../errors/validation-failed')
+const PercentageValue = require('../src/percentage')
+const ValidationFailedError = require('../src/errors/validation-failed')
 
 /* global describe, it */
 /* eslint no-unused-vars: 0 */

@@ -1,8 +1,8 @@
 'use strict'
 
 const _map = require('lodash/map')
-const DomainValue = require('../domain')
-const ValidationFailedError = require('../errors/validation-failed')
+const DomainValue = require('../src/domain')
+const ValidationFailedError = require('../src/errors/validation-failed')
 
 /* global describe, it */
 

@@ -1,8 +1,8 @@
 'use strict'
 
 const _map = require('lodash/map')
-const TimestampValue = require('../timestamp')
-const ValidationFailedError = require('../errors/validation-failed')
+const TimestampValue = require('../src/timestamp')
+const ValidationFailedError = require('../src/errors/validation-failed')
 
 /* global describe, it */
 /* eslint no-unused-vars: 0 */
