@@ -1,39 +1,61 @@
 'use strict'
 
-const ValidationFailedError = require('./errors/validation-failed')
-const t = require('tcomb')
+import {ValidationFailedError} from './errors'
+import {String as StringType, irreducible} from 'tcomb'
 
-/**
- * A second level domain
- *
- * @param {String} domain
- * @constructor
- * @throws ValidationFailedException if the creation fails due to invalid data
- */
-function DomainValue (domain) {
-  // http://stackoverflow.com/a/30007882
-  if (!/^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$/.test(domain)) {
-    throw new ValidationFailedError('Not a domain: ' + domain)
+// http://stackoverflow.com/a/30007882
+const domainRegex = /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$/
+
+export class DomainValue {
+  /**
+   * A second level domain
+   *
+   * @param {String|DomainValue} domain
+   * @throws ValidationFailedException if the creation fails due to invalid data
+   */
+  constructor (domain) {
+    if (DomainValue.is(domain)) {
+      domain = domain.domain
+    }
+    try {
+      StringType(domain)
+    } catch (e) {
+      throw new ValidationFailedError(`Not a domain: "${domain}"`, domain, e)
+    }
+    if (!domainRegex.test(domain)) {
+      throw new ValidationFailedError('Not a domain: ' + domain)
+    }
+    if (domain.split('.').length !== 2) {
+      throw new ValidationFailedError('Only second level domains are allowed')
+    }
+    this.domain = domain
   }
-  if (domain.split('.').length !== 2) {
-    throw new ValidationFailedError('Only second level domains are allowed')
+
+  /**
+   * @returns {String}
+   */
+  toString () {
+    return this.domain
   }
-  this.domain = domain
+
+  /**
+   * @param {DomainValue} domain
+   * @returns {boolean}
+   */
+  equals (domain) {
+    DomainValueType(domain)
+    return this.domain === domain.toString()
+  }
+
+  /**
+   * Returns true if x is of type DomainValue
+   *
+   * @param {object} x
+   * @returns {boolean}
+   */
+  static is (x) {
+    return (x instanceof DomainValue) || (x && x.constructor && x.constructor.name === DomainValue.name && 'domain' in x)
+  }
 }
 
-DomainValue.prototype.toString = function () {
-  return this.domain
-}
-
-/**
- * @param {DomainValue} domain
- * @returns {boolean}
- */
-DomainValue.prototype.equals = function (domain) {
-  DomainValue.Type(domain)
-  return this.domain === domain.toString()
-}
-
-DomainValue.Type = t.irreducible('DomainValue', (x) => x.constructor.name === DomainValue.name)
-
-module.exports = DomainValue
+export const DomainValueType = irreducible('DomainValueType', x => DomainValue.is(x))

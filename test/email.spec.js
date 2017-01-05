@@ -1,21 +1,21 @@
 'use strict'
 
-const _map = require('lodash/map')
-const EmailValue = require('../src/email')
-const ValidationFailedError = require('../src/errors/validation-failed')
+import {EmailValue, EmailValueType} from '../src'
+import {ValidationFailedError} from '../src/errors'
 
 /* global describe, it */
+/* eslint no-unused-vars: 0 */
 
 const expect = require('chai').expect
 
 describe('EmailValue', () => {
   describe('constructur()', function () {
     it('should parse a email', (done) => {
-      _map([
+      [
         'markus@resourceful-humans.com',
         'markus+example@resourceful-humans.com',
         'm@cto.hiv'
-      ], (email) => {
+      ].map(email => {
         let d = new EmailValue(email)
         expect(d.toString()).to.equal(email)
       })
@@ -23,33 +23,33 @@ describe('EmailValue', () => {
     })
 
     it('should not parse invalid emails', (done) => {
-      _map([
+      [
         'not a email',
         'm@localhost' // not a second level domain
-      ], (email) => {
+      ].map(email => {
         expect(() => {
-          EmailValue(email)
+          let e = new EmailValue(email)
         }).to.throw(ValidationFailedError)
       })
       done()
     })
   })
 
-  describe('.Type', () => {
+  describe('Type', () => {
     it('should detect invalid types', (done) => {
-      _map([
+      [
         {foo: 'bar'},
         null,
         undefined
-      ], (v) => {
+      ].map(v => {
         expect(() => {
-          EmailValue.Type(v)
+          EmailValueType(v)
         }).to.throw(TypeError)
       })
       done()
     })
     it('should accept valid types', (done) => {
-      EmailValue.Type(new EmailValue('john@example.com'))
+      EmailValueType(new EmailValue('john@example.com'))
       done()
     })
   })

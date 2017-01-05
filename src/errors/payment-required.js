@@ -1,16 +1,12 @@
-'use strict'
+export class PaymentRequiredError {
+  constructor (message) {
+    this.name = PaymentRequiredError.name
+    this.message = message
+  }
 
-function PaymentRequiredError (message) {
-  this.name = 'PaymentRequiredError'
-  this.message = message
+  static is (err) {
+    return err instanceof Error && err.name === PaymentRequiredError.name
+  }
 }
 
 PaymentRequiredError.prototype = Object.create(Error.prototype)
-PaymentRequiredError.prototype.constructor = PaymentRequiredError
-PaymentRequiredError.prototype.toString = function () {
-  return this.message
-}
-
-PaymentRequiredError.is = err => err instanceof Error && err.name === PaymentRequiredError.name
-
-module.exports = PaymentRequiredError

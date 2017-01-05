@@ -1,49 +1,63 @@
 'use strict'
 
-const t = require('tcomb')
-const Integer = t.refinement(t.Number, (n) => n % 1 === 0, 'Integer')
-const ValidationFailedError = require('./errors/validation-failed')
+import {ValidationFailedError} from './errors'
+import {irreducible, Integer as IntegerType} from 'tcomb'
 
-/**
- * @param {Number} timestamp
- * @constructor
- * @throws ValidationFailedException if the creation fails due to invalid data
- */
-function TimestampValue (timestamp) {
-  if (timestamp instanceof Date) {
-    timestamp = timestamp.getTime()
+export class TimestampValue {
+
+  /**
+   * @param {Number|Date|TimestampValue} timestamp
+   * @constructor
+   * @throws ValidationFailedException if the creation fails due to invalid data
+   */
+  constructor (timestamp) {
+    if (timestamp instanceof Date) {
+      timestamp = timestamp.getTime()
+    }
+    if (TimestampValue.is(timestamp)) {
+      timestamp = timestamp.timestamp
+    }
+    try {
+      IntegerType(timestamp)
+    } catch (e) {
+      throw new ValidationFailedError('Not a timestamp: ' + timestamp, timestamp, e)
+    }
+    this.timestamp = timestamp
   }
-  try {
-    Integer(timestamp)
-  } catch (e) {
-    throw new ValidationFailedError('Not a timestamp: ' + timestamp, timestamp, e)
+
+  /**
+   * @returns {String}
+   */
+  toString () {
+    return '' + this.timestamp
   }
-  this.timestamp = timestamp
+
+  /**
+   * @returns {Number}
+   */
+  valueOf () {
+    return this.timestamp
+  }
+
+  /**
+   * @param {TimestampValue} timestamp
+   * @returns {boolean}
+   */
+  equals (timestamp) {
+    TimestampValueType(timestamp)
+    return this.timestamp === timestamp.valueOf()
+  }
+
+  /**
+   * Returns true if x is of type TimestampValue
+   *
+   * @param {object} x
+   * @returns {boolean}
+   */
+  static is (x) {
+    return (x instanceof TimestampValue) || (x && x.constructor && x.constructor.name === TimestampValue.name && 'timestamp' in x)
+  }
 }
 
-/**
- * @returns {string}
- */
-TimestampValue.prototype.toString = function () {
-  return '' + this.timestamp
-}
+export const TimestampValueType = irreducible('TimestampValueType', x => TimestampValue.is(x))
 
-/**
- * @returns {number}
- */
-TimestampValue.prototype.valueOf = function () {
-  return this.timestamp
-}
-
-/**
- * @param {TimestampValue} timestamp
- * @returns {boolean}
- */
-TimestampValue.prototype.equals = function (timestamp) {
-  TimestampValue.Type(timestamp)
-  return this.timestamp === timestamp.valueOf()
-}
-
-TimestampValue.Type = t.irreducible('TimestampValue', (x) => x.constructor.name === TimestampValue.name)
-
-module.exports = TimestampValue

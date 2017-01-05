@@ -1,10 +1,7 @@
 'use strict'
 
-const _map = require('lodash/map')
-const map = require('lodash/fp/map')
-const forEach = require('lodash/fp/forEach')
-const PercentageValue = require('../src/percentage')
-const ValidationFailedError = require('../src/errors/validation-failed')
+import {PercentageValue, PercentageValueType} from '../src'
+import {ValidationFailedError} from '../src/errors'
 
 /* global describe, it */
 /* eslint no-unused-vars: 0 */
@@ -14,30 +11,28 @@ const expect = require('chai').expect
 describe('PercentageValue', () => {
   describe('constructor()', () => {
     it('should accept a percentage', () => {
-      map((data) => {
+      [
+        [0, '0%'],
+        [50, '50%'],
+        [33.3, '33%'],
+        [100, '100%'],
+        ['0', '0%', 0],
+        ['100', '100%', 100],
+        [-1, '-1%'],
+        [101, '101%'],
+        [-100, '-100%']
+      ].map(data => {
         let u = new PercentageValue(data[0])
         expect(u.toString()).to.equal(data[1])
         expect(u.valueOf()).to.equal(typeof data[2] !== 'undefined' ? data[2] : data[0])
-      })(
-        [
-          [0, '0%'],
-          [50, '50%'],
-          [33.3, '33%'],
-          [100, '100%'],
-          ['0', '0%', 0],
-          ['100', '100%', 100],
-          [-1, '-1%'],
-          [101, '101%'],
-          [-100, '-100%']
-        ]
-      )
+      })
     })
 
     it('should not parse invalid percentages', () => {
-      _map([
+      [
         'bogus',
         ''
-      ], (v) => {
+      ].map(v => {
         expect(() => {
           let u = new PercentageValue(v)
         }, JSON.stringify(v) + ' should not be accepted as a valid value').to.throw(ValidationFailedError)
@@ -49,21 +44,21 @@ describe('PercentageValue', () => {
     })
   })
 
-  describe('.Type', () => {
+  describe('Type', () => {
     it('should detect invalid types', (done) => {
-      _map([
+      [
         {foo: 'bar'},
         null,
         undefined
-      ], (v) => {
+      ].map(v => {
         expect(() => {
-          PercentageValue.Type(v)
+          PercentageValueType(v)
         }).to.throw(TypeError)
       })
       done()
     })
     it('should accept valid types', (done) => {
-      PercentageValue.Type(new PercentageValue(75))
+      PercentageValueType(new PercentageValue(75))
       done()
     })
   })

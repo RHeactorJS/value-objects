@@ -1,20 +1,20 @@
 'use strict'
 
-const _map = require('lodash/map')
-const SlugValue = require('../src/slug')
-const ValidationFailedError = require('../src/errors/validation-failed')
+import {SlugValue, SlugValueType} from '../src'
+import {ValidationFailedError} from '../src/errors'
 
 /* global describe, it */
+/* eslint no-unused-vars: 0 */
 
 const expect = require('chai').expect
 
 describe('SlugValue', () => {
   describe('constructor()', function () {
     it('should parse a slug', (done) => {
-      _map([
+      [
         'some-slug',
         'short'
-      ], (slug) => {
+      ].map(slug => {
         let d = new SlugValue(slug)
         expect(d.toString()).to.equal(slug)
       })
@@ -22,36 +22,36 @@ describe('SlugValue', () => {
     })
 
     it('should not parse invalid slugs', (done) => {
-      _map([
+      [
         'not a slug',
         'a-',         //  trailing dash
         'a--',        //  trailing dash
         '-a',         //  leading dash
         '--a'         //  leading dash
-      ], (slug) => {
+      ].map(slug => {
         expect(() => {
-          SlugValue(slug)
+          let s = new SlugValue(slug)
         }).to.throw(ValidationFailedError)
       })
       done()
     })
   })
 
-  describe('.Type', () => {
+  describe('Type', () => {
     it('should detect invalid types', (done) => {
-      _map([
+      [
         {foo: 'bar'},
         null,
         undefined
-      ], (v) => {
+      ].map(v => {
         expect(() => {
-          SlugValue.Type(v)
+          SlugValueType(v)
         }).to.throw(TypeError)
       })
       done()
     })
     it('should accept valid types', (done) => {
-      SlugValue.Type(new SlugValue('slug'))
+      SlugValueType(new SlugValue('slug'))
       done()
     })
   })

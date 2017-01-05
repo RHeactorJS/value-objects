@@ -1,16 +1,11 @@
-'use strict'
-
-function EntryNotFoundError (message) {
-  this.name = 'EntryNotFoundError'
-  this.message = message
+export class EntryNotFoundError {
+  constructor (message) {
+    this.name = EntryNotFoundError.name
+    this.message = message
+  }
+  static is (err) {
+    return err instanceof Error && err.name === EntryNotFoundError.name
+  }
 }
 
 EntryNotFoundError.prototype = Object.create(Error.prototype)
-EntryNotFoundError.prototype.constructor = EntryNotFoundError
-EntryNotFoundError.prototype.toString = function () {
-  return this.message
-}
-
-EntryNotFoundError.is = err => err instanceof Error && err.name === EntryNotFoundError.name
-
-module.exports = EntryNotFoundError

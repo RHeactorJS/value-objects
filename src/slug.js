@@ -1,34 +1,55 @@
 'use strict'
 
-const ValidationFailedError = require('./errors/validation-failed')
-const t = require('tcomb')
+import {ValidationFailedError} from './errors'
+import {irreducible, String as StringType} from 'tcomb'
 
-/**
- * @param {String} slug
- * @constructor
- * @throws ValidationFailedException if the creation fails due to invalid data
- */
-function SlugValue (slug) {
-  slug = slug.toLowerCase()
-  if (!/^[a-z0-9]+(?!-+$)[a-z0-9-]*$/.test(slug)) {
-    throw new ValidationFailedError('Not a slug: ' + slug)
+export class SlugValue {
+  /**
+   * @param {String|SlugValue} slug
+   * @constructor
+   * @throws ValidationFailedException if the creation fails due to invalid data
+   */
+  constructor (slug) {
+    if (SlugValue.is(slug)) {
+      slug = slug.slug
+    }
+    try {
+      StringType(slug)
+    } catch (e) {
+      throw new ValidationFailedError(`Not a slug: "${slug}"`, slug, e)
+    }
+    slug = slug.toLowerCase()
+    if (!/^[a-z0-9]+(?!-+$)[a-z0-9-]*$/.test(slug)) {
+      throw new ValidationFailedError('Not a slug: ' + slug)
+    }
+    this.slug = slug
   }
-  this.slug = slug
+
+  /**
+   * @returns {String}
+   */
+  toString () {
+    return this.slug
+  }
+
+  /**
+   * @param {SlugValue} slug
+   * @returns {boolean}
+   */
+  equals (slug) {
+    SlugValueType(slug)
+    return this.slug === slug.toString()
+  }
+
+  /**
+   * Returns true if x is of type SlugValue
+   *
+   * @param {object} x
+   * @returns {boolean}
+   */
+  static is (x) {
+    return (x instanceof SlugValue) || (x && x.constructor && x.constructor.name === SlugValue.name && 'slug' in x)
+  }
 }
 
-SlugValue.prototype.toString = function () {
-  return this.slug
-}
-
-/**
- * @param {SlugValue} slug
- * @returns {boolean}
- */
-SlugValue.prototype.equals = function (slug) {
-  SlugValue.Type(slug)
-  return this.slug === slug.toString()
-}
-
-SlugValue.Type = t.irreducible('SlugValue', (x) => x.constructor.name === SlugValue.name)
-
-module.exports = SlugValue
+export const SlugValueType = irreducible('SlugValueType', x => SlugValue.is(x))

@@ -1,8 +1,7 @@
 'use strict'
 
-const _map = require('lodash/map')
-const TimestampValue = require('../src/timestamp')
-const ValidationFailedError = require('../src/errors/validation-failed')
+import {TimestampValue, TimestampValueType} from '../src'
+import {ValidationFailedError} from '../src/errors'
 
 /* global describe, it */
 /* eslint no-unused-vars: 0 */
@@ -12,11 +11,11 @@ const expect = require('chai').expect
 describe('TimestampValue', () => {
   describe('constructor()', () => {
     it('should accept a timestamp', (done) => {
-      _map([
+      [
         1,
         Date.now(),
         new Date('1900-01-01T00:00:00').getTime()
-      ], (timestamp) => {
+      ].map(timestamp => {
         let u = new TimestampValue(timestamp)
         expect(u.toString()).to.equal('' + timestamp)
       })
@@ -56,21 +55,21 @@ describe('TimestampValue', () => {
     })
   })
 
-  describe('.Type', () => {
+  describe('Type', () => {
     it('should detect invalid types', (done) => {
-      _map([
+      [
         {foo: 'bar'},
         null,
         undefined
-      ], (v) => {
+      ].map(v => {
         expect(() => {
-          TimestampValue.Type(v)
+          TimestampValueType(v)
         }).to.throw(TypeError)
       })
       done()
     })
     it('should accept valid types', (done) => {
-      TimestampValue.Type(new TimestampValue(Date.now()))
+      TimestampValueType(new TimestampValue(Date.now()))
       done()
     })
   })

@@ -1,24 +1,24 @@
 'use strict'
 
-const _map = require('lodash/map')
-const DomainValue = require('../src/domain')
-const ValidationFailedError = require('../src/errors/validation-failed')
+import {DomainValue, DomainValueType} from '../src'
+import {ValidationFailedError} from '../src/errors'
 
 /* global describe, it */
+/* eslint no-unused-vars: 0 */
 
 const expect = require('chai').expect
 
 describe('DomainValue', () => {
   describe('constructor()', function () {
     it('should parse a domain', (done) => {
-      _map([
+      [
         'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijk.com', // 63 chars
         'rh.com', // two letter
         'r.com', // one letter
         'r-h.com', // with dash
         'xn--mgb9awbf6b.xn--4gbrim', // عُمان.موقع (oman.site)
         'xn--brger-kva.de' // bürger.de
-      ], (domain) => {
+      ].map(domain => {
         let d = new DomainValue(domain)
         expect(d.toString()).to.equal(domain)
       })
@@ -26,36 +26,36 @@ describe('DomainValue', () => {
     })
 
     it('should not parse invalid domains', (done) => {
-      _map([
+      [
         'bogus', // No second level
         'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl.com', //  64 chars
         'www.example.com', //  subdomain
         'a-.com', //  trailing dash
         '-a.com' //  leading dash
-      ], (domain) => {
+      ].map(domain => {
         expect(() => {
-          DomainValue(domain)
+          let d = new DomainValue(domain)
         }, `It should not parse ${domain} as a domain`).to.throw(ValidationFailedError)
       })
       done()
     })
   })
 
-  describe('DomainValue.Type', () => {
+  describe('DomainValueType', () => {
     it('should detect invalid types', (done) => {
-      _map([
+      [
         {foo: 'bar'},
         null,
         undefined
-      ], (v) => {
+      ].map(v => {
         expect(() => {
-          DomainValue.Type(v)
+          DomainValueType(v)
         }).to.throw(TypeError)
       })
       done()
     })
     it('should accept valid types', (done) => {
-      DomainValue.Type(new DomainValue('example.com'))
+      DomainValueType(new DomainValue('example.com'))
       done()
     })
   })

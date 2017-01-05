@@ -1,53 +1,62 @@
 'use strict'
 
-const t = require('tcomb')
-const Scalar = t.union([t.String, t.Number])
-const ValidationFailedError = require('./errors/validation-failed')
+import {ValidationFailedError} from './errors'
+import {irreducible, union, String as StringType, Number as NumberType} from 'tcomb'
 
-/**
- * @param {string|number} percentage
- * @constructor
- * @throws ValidationFailedException if the creation fails due to invalid percentage
- */
-function PercentageValue (percentage) {
-  if (PercentageValue.is(percentage)) {
-    percentage = percentage.percentage
+const ScalarType = union([StringType, NumberType])
+
+export class PercentageValue {
+  /**
+   * @param {String|number|PercentageValue} percentage
+   * @constructor
+   * @throws ValidationFailedException if the creation fails due to invalid percentage
+   */
+  constructor (percentage) {
+    if (PercentageValue.is(percentage)) {
+      percentage = percentage.percentage
+    }
+    try {
+      ScalarType(percentage)
+    } catch (e) {
+      throw new ValidationFailedError(`Not a percentage: "${percentage}"`, percentage, e)
+    }
+    percentage = parseFloat(percentage)
+    if (isNaN(percentage)) throw new ValidationFailedError('Not a percentage: ' + percentage, percentage)
+    this.percentage = percentage
   }
-  try {
-    Scalar(percentage)
-  } catch (e) {
-    throw new ValidationFailedError('Not a percentage: ' + percentage, percentage, e)
+
+  /**
+   * @returns {String}
+   */
+  toString () {
+    return Math.round(this.percentage) + '%'
   }
-  percentage = parseFloat(percentage)
-  if (isNaN(percentage)) throw new ValidationFailedError('Not a percentage: ' + percentage, percentage)
-  this.percentage = percentage
+
+  /**
+   * @returns {number}
+   */
+  valueOf () {
+    return this.percentage
+  }
+
+  /**
+   * @param {PercentageValue} percentage
+   * @returns {boolean}
+   */
+  equals (percentage) {
+    PercentageValueType(percentage)
+    return this.percentage === percentage.valueOf()
+  }
+
+  /**
+   * Returns true if x is of type PercentageValue
+   *
+   * @param {object} x
+   * @returns {boolean}
+   */
+  static is (x) {
+    return (x instanceof PercentageValue) || (x && x.constructor && x.constructor.name === PercentageValue.name && 'percentage' in x)
+  }
 }
 
-/**
- * @returns {string}
- */
-PercentageValue.prototype.toString = function () {
-  return Math.round(this.percentage) + '%'
-}
-
-/**
- * @returns {number}
- */
-PercentageValue.prototype.valueOf = function () {
-  return this.percentage
-}
-
-/**
- * @param {PercentageValue} percentage
- * @returns {boolean}
- */
-PercentageValue.prototype.equals = function (percentage) {
-  PercentageValue.Type(percentage)
-  return this.percentage === percentage.valueOf()
-}
-
-PercentageValue.Type = t.irreducible('PercentageValue', (x) => x.constructor.name === PercentageValue.name)
-
-PercentageValue.is = o => o.constructor.name === PercentageValue.name
-
-module.exports = PercentageValue
+export const PercentageValueType = irreducible('PercentageValueType', x => PercentageValue.is(x))

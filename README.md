@@ -13,11 +13,11 @@ A collection of value objects
 
 ## Common API
 
-### .Type()
+### ValueType()
 
-This method exposes a [tcomb](https://github.com/gcanti/tcomb) type validation base on the **name of the type**.
+This method exposes a [tcomb](https://github.com/gcanti/tcomb) type validation base on `instanceof` or the **name of the type** and it's properties.
 
-Note that instanceof can't be used because having this check will return false, because the application using
+Note that instanceof can't be used always because having this check will return false, because the application using
 the value-objects package will create an instance that Node.js thinks to be from a different location that the
 one referenced in this package's `uri.js`
 
@@ -37,4 +37,13 @@ You can compare two value objects with the `.equals()` method:
 const ex = new URIValue('https://example.com') 
 ex.equals(new URIValue('https://example.com')) // -> true
 ex.equals(new URIValue('https://acme.com'))    // -> false
+```
+## .is()
+
+You can check if a given value *is* of this value object:
+
+```javascript
+const ex = new URIValue('https://example.com') 
+URIValue.is(ex)    // -> true
+DomainValue.is(ex) // -> false
 ```

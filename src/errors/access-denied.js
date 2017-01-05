@@ -1,20 +1,21 @@
-'use strict'
-
-function AccessDeniedError (resource, message) {
-  this.name = 'AccessDeniedError'
-  this.resource = resource
-  this.message = message
-}
-AccessDeniedError.prototype = Object.create(Error.prototype)
-AccessDeniedError.prototype.constructor = AccessDeniedError
-AccessDeniedError.prototype.toString = function () {
-  let msg = 'Access denied: ' + this.resource
-  if (this.message) {
-    msg += ' (' + this.message + ')'
+export class AccessDeniedError {
+  constructor (resource, message) {
+    this.name = AccessDeniedError.name
+    this.message = message
+    this.resource = resource
   }
-  return msg
+
+  toString () {
+    let msg = 'Access denied: ' + this.resource
+    if (this.message) {
+      msg += ' (' + this.message + ')'
+    }
+    return msg
+  }
+
+  static is (err) {
+    return err instanceof Error && err.constructor.name === AccessDeniedError.name
+  }
 }
 
-AccessDeniedError.is = err => err instanceof Error && err.name === AccessDeniedError.name
-
-module.exports = AccessDeniedError
+AccessDeniedError.prototype = Object.create(Error.prototype)

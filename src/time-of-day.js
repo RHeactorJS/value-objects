@@ -1,49 +1,70 @@
 'use strict'
 
-const ValidationFailedError = require('./errors/validation-failed')
-const t = require('tcomb')
+import {ValidationFailedError} from './errors'
+import {irreducible, String as StringType} from 'tcomb'
 
-/**
- * @param {String} timeOfDay
- * @constructor
- * @throws ValidationFailedException if the creation fails due to invalid data
- */
-function TimeOfDayValue (timeOfDay) {
-  if (!/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/.test(timeOfDay)) {
-    throw new ValidationFailedError('Not a timeOfDay: ' + timeOfDay)
+export class TimeOfDayValue {
+  /**
+   * @param {String|TimeOfDayValue} timeOfDay
+   * @constructor
+   * @throws ValidationFailedException if the creation fails due to invalid data
+   */
+  constructor (timeOfDay) {
+    if (TimeOfDayValue.is(timeOfDay)) {
+      timeOfDay = timeOfDay.timeOfDay
+    }
+    try {
+      StringType(timeOfDay)
+    } catch (e) {
+      throw new ValidationFailedError(`Not a timeOfDay: "${timeOfDay}"`, timeOfDay, e)
+    }
+    if (!/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/.test(timeOfDay)) {
+      throw new ValidationFailedError('Not a timeOfDay: ' + timeOfDay)
+    }
+    this.timeOfDay = timeOfDay
   }
-  this.timeOfDay = timeOfDay
+
+  /**
+   * @returns {String}
+   */
+  toString () {
+    return this.timeOfDay
+  }
+
+  /**
+   * Returns the hour of the time as a number
+   * @returns {Number}
+   */
+  hour () {
+    return +this.timeOfDay.split(':')[0]
+  }
+
+  /**
+   * Returns the minute of the time as a number
+   * @returns {Number}
+   */
+  minute () {
+    return +this.timeOfDay.split(':')[1]
+  }
+
+  /**
+   * @param {TimeOfDayValue} timeOfDay
+   * @returns {boolean}
+   */
+  equals (timeOfDay) {
+    TimeOfDayValueType(timeOfDay)
+    return this.timeOfDay === timeOfDay.toString()
+  }
+
+  /**
+   * Returns true if x is of type TimeOfDayValue
+   *
+   * @param {object} x
+   * @returns {boolean}
+   */
+  static is (x) {
+    return (x instanceof TimeOfDayValue) || (x && x.constructor && x.constructor.name === TimeOfDayValue.name && 'timeOfDay' in x)
+  }
 }
 
-TimeOfDayValue.prototype.toString = function () {
-  return this.timeOfDay
-}
-
-/**
- * Returns the hour of the time as a number
- * @returns {Number}
- */
-TimeOfDayValue.prototype.hour = function () {
-  return +this.timeOfDay.split(':')[0]
-}
-
-/**
- * Returns the minute of the time as a number
- * @returns {Number}
- */
-TimeOfDayValue.prototype.minute = function () {
-  return +this.timeOfDay.split(':')[1]
-}
-
-/**
- * @param {TimeOfDayValue} timeOfDay
- * @returns {boolean}
- */
-TimeOfDayValue.prototype.equals = function (timeOfDay) {
-  TimeOfDayValue.Type(timeOfDay)
-  return this.timeOfDay === timeOfDay.toString()
-}
-
-TimeOfDayValue.Type = t.irreducible('TimeOfDayValueValue', (x) => x.constructor.name === TimeOfDayValue.name)
-
-module.exports = TimeOfDayValue
+export const TimeOfDayValueType = irreducible('TimeOfDayValueValueType', x => TimeOfDayValue.is(x))

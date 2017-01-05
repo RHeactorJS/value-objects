@@ -1,35 +1,57 @@
 'use strict'
 
-const ValidationFailedError = require('./errors/validation-failed')
-const t = require('tcomb')
+import {ValidationFailedError} from './errors'
+import {String as StringType, irreducible} from 'tcomb'
 
-/**
- * @param {String} email
- * @constructor
- * @throws ValidationFailedException if the creation fails due to invalid data
- */
-function EmailValue (email) {
-  email = email.toLowerCase()
-  // http://emailregex.com/
-  if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
-    throw new ValidationFailedError('Not an email: ' + email)
+const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+export class EmailValue {
+  /**
+   * @param {String|EmailValue} email
+   * @throws ValidationFailedException if the creation fails due to invalid data
+   */
+  constructor (email) {
+    if (EmailValue.is(email)) {
+      email = email.email
+    }
+    try {
+      StringType(email)
+    } catch (e) {
+      throw new ValidationFailedError(`Not an email: "${email}"`, email, e)
+    }
+    email = email.toLowerCase()
+    // http://emailregex.com/
+    if (!emailRegex.test(email)) {
+      throw new ValidationFailedError('Not an email: ' + email)
+    }
+    this.email = email
   }
-  this.email = email
+
+  /**
+   * @returns {String}
+   */
+  toString () {
+    return this.email
+  }
+
+  /**
+   * @param {EmailValue} email
+   * @returns {boolean}
+   */
+  equals (email) {
+    EmailValueType(email)
+    return this.email === email.toString()
+  }
+
+  /**
+   * Returns true if x is of type EmailValue
+   *
+   * @param {object} x
+   * @returns {boolean}
+   */
+  static is (x) {
+    return (x instanceof EmailValue) || (x && x.constructor && x.constructor.name === EmailValue.name && 'email' in x)
+  }
 }
 
-EmailValue.prototype.toString = function () {
-  return this.email
-}
-
-/**
- * @param {EmailValue} email
- * @returns {boolean}
- */
-EmailValue.prototype.equals = function (email) {
-  EmailValue.Type(email)
-  return this.email === email.toString()
-}
-
-EmailValue.Type = t.irreducible('EmailValue', (x) => x.constructor.name === EmailValue.name)
-
-module.exports = EmailValue
+export const EmailValueType = irreducible('EmailValueType', x => EmailValue.is(x))

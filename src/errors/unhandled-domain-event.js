@@ -1,16 +1,17 @@
-'use strict'
+export class UnhandledDomainEventError {
+  constructor (event) {
+    this.name = UnhandledDomainEventError.name
+    this.message = 'Unhandled domain event'
+    this.event = event
+  }
 
-function UnhandledDomainEventError (name) {
-  this.name = 'UnhandledDomainEventError'
-  this.message = 'Unhandled domain event'
-  this.name = name
+  toString () {
+    return `${this.message}: "${this.event}"`
+  }
+
+  static is (err) {
+    return err instanceof Error && err.name === UnhandledDomainEventError.name
+  }
 }
+
 UnhandledDomainEventError.prototype = Object.create(Error.prototype)
-UnhandledDomainEventError.prototype.constructor = UnhandledDomainEventError
-UnhandledDomainEventError.prototype.toString = function () {
-  return this.message + ' (' + this.name + ')'
-}
-
-UnhandledDomainEventError.is = err => err instanceof Error && err.name === UnhandledDomainEventError.name
-
-module.exports = UnhandledDomainEventError
