@@ -7,6 +7,7 @@ class MyError {
   constructor(message) {
     this.name = MyError.name
     this.message = message
+    this.stack = (new Error(message)).stack
   }
 }
 MyError.prototype = Object.create(Error.prototype)

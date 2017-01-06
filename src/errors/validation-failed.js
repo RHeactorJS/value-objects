@@ -4,6 +4,7 @@ export class ValidationFailedError {
     this.message = message
     this.data = data
     this.error = error
+    this.stack = (new Error(this.message)).stack
   }
 
   toString () {

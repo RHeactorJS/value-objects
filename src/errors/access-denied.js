@@ -3,6 +3,7 @@ export class AccessDeniedError {
     this.name = AccessDeniedError.name
     this.message = message
     this.resource = resource
+    this.stack = (new Error(this.message)).stack
   }
 
   toString () {

@@ -2,6 +2,7 @@ export class ConflictError {
   constructor (message) {
     this.name = ConflictError.name
     this.message = message
+    this.stack = (new Error(this.message)).stack
   }
 
   static is (err) {

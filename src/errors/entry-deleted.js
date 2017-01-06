@@ -3,6 +3,7 @@ export class EntryDeletedError {
     this.name = EntryDeletedError.namae
     this.message = message
     this.entry = entry
+    this.stack = (new Error(this.message)).stack
   }
 
   static is (err) {

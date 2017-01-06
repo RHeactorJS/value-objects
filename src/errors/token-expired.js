@@ -3,6 +3,7 @@ export class TokenExpiredError {
     this.name = TokenExpiredError.name
     this.message = 'The token expired'
     this.token = token
+    this.stack = (new Error(this.message)).stack
   }
 
   static is (err) {

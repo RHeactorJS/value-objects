@@ -2,6 +2,7 @@ export class EntryAlreadyExistsError {
   constructor (message) {
     this.name = EntryAlreadyExistsError.name
     this.message = message
+    this.stack = (new Error(this.message)).stack
   }
 
   static is (err) {

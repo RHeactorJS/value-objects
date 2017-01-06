@@ -2,6 +2,7 @@ export class PaymentRequiredError {
   constructor (message) {
     this.name = PaymentRequiredError.name
     this.message = message
+    this.stack = (new Error(this.message)).stack
   }
 
   static is (err) {

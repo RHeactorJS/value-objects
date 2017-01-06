@@ -3,6 +3,7 @@ export class UnhandledDomainEventError {
     this.name = UnhandledDomainEventError.name
     this.message = 'Unhandled domain event'
     this.event = event
+    this.stack = (new Error(this.message)).stack
   }
 
   toString () {
