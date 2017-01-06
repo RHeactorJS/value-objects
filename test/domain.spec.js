@@ -2,11 +2,10 @@
 
 import {DomainValue, DomainValueType} from '../src'
 import {ValidationFailedError} from '../src/errors'
+import {expect} from 'chai'
 
 /* global describe, it */
 /* eslint no-unused-vars: 0 */
-
-const expect = require('chai').expect
 
 describe('DomainValue', () => {
   describe('constructor()', function () {
