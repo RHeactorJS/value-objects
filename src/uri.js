@@ -3,8 +3,8 @@
 import {ValidationFailedError} from './errors'
 import {String as StringType, irreducible} from 'tcomb'
 
-// http://stackoverflow.com/a/3809435
-const URIRegex = /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/
+// http://stackoverflow.com/a/3809435, + DomainRegex
+const uriRegex = /^https?:\/\/(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9](\/[-a-zA-Z0-9@:%_+.~#?&//=()]*)*$/i
 
 export class URIValue {
   /**
@@ -22,7 +22,7 @@ export class URIValue {
     } catch (e) {
       throw new ValidationFailedError(`Not a URI: "${uri}"`, uri, e)
     }
-    if (!URIRegex.test(uri)) {
+    if (!uriRegex.test(uri)) {
       throw new ValidationFailedError('Not a URI: ' + uri)
     }
     this.uri = uri
