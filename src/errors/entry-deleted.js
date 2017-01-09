@@ -7,7 +7,7 @@ export class EntryDeletedError {
   }
 
   static is (err) {
-    return err instanceof Error && err.cstructor.name === EntryDeletedError.name
+    return err instanceof Error && err.name === EntryDeletedError.name
   }
 }
 
