@@ -5,7 +5,6 @@ export class ApplicationError {
     this.stack = (new Error(this.message)).stack
   }
 
-
   /**
    * Returns true if x is of type ApplicationError
    *

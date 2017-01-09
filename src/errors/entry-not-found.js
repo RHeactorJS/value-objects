@@ -10,7 +10,8 @@ export class EntryNotFoundError {
    *
    * @param {object} err
    * @returns {boolean}
-   */static is (err) {
+   */
+  static is (err) {
     return err instanceof Error && err.name === EntryNotFoundError.name
   }
 }

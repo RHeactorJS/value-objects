@@ -19,7 +19,6 @@ export class ValidationFailedError {
     return message
   }
 
-
   /**
    * Returns true if x is of type ValidationFailedError
    *
