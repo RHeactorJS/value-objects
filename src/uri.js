@@ -3,8 +3,7 @@
 import {ValidationFailedError} from './errors'
 import {String as StringType, irreducible} from 'tcomb'
 
-// http://stackoverflow.com/a/3809435, + DomainRegex
-const uriRegex = /^https?:\/\/(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9](\/[-a-zA-Z0-9@:%_+.~#?&//=()]*)*$/i
+const uriRegex = /^https?:\/\/(((?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9])|((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)))(:(6553[0-5]|655[0-2]\d|65[0-4]\d\d|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}|0))?(\/[-a-zA-Z0-9@:%_+.~#?&//=()]*)*$/i
 
 export class URIValue {
   /**

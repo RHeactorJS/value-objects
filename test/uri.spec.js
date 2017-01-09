@@ -30,7 +30,12 @@ describe('URIValue', () => {
         'http://foo.bar/?q=Test%20URL-encoded%20stuff',
         'http://1337.net',
         'http://a.b-c.de',
-        'http://223.255.255.254'
+        'http://223.255.255.254',
+        'http://142.42.1.1/',
+        'http://142.42.1.1:8080/',
+        'http://0.0.0.0',
+        'http://10.1.1.0',
+        'http://10.1.1.1'
       ].map(uri => {
         let u = new URIValue(uri)
         expect(u.toString()).to.equal(uri)
@@ -52,9 +57,6 @@ describe('URIValue', () => {
         'http://userid@example.com:8080/',
         'http://userid:password@example.com',
         'http://userid:password@example.com/',
-        // IPs
-        'http://142.42.1.1/',
-        'http://142.42.1.1:8080/',
         // Unicode
         'http://➡.ws/䨹',
         'http://⌘.ws',
@@ -96,13 +98,10 @@ describe('URIValue', () => {
         // FIXME: 'http://a.b--c.de/',
         'http://-a.b.co',
         'http://a.b-.co',
-        'http://0.0.0.0',
-        'http://10.1.1.0',
         'http://3628126748',
         'http://.www.foo.bar/',
         'http://www.foo.bar./',
-        'http://.www.foo.bar./',
-        'http://10.1.1.1'
+        'http://.www.foo.bar./'
       ].map(uri => {
         expect(() => {
           let u = new URIValue(uri)
