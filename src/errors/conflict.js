@@ -5,6 +5,12 @@ export class ConflictError {
     this.stack = (new Error(this.message)).stack
   }
 
+  /**
+   * Returns true if x is of type ConflictErrorw
+   *
+   * @param {object} err
+   * @returns {boolean}
+   */
   static is (err) {
     return err instanceof Error && err.name === ConflictError.name
   }

@@ -6,8 +6,14 @@ export class TokenExpiredError {
     this.stack = (new Error(this.message)).stack
   }
 
+  /**
+   * Returns true if x is of type TokenExpiredError
+   *
+   * @param {object} err
+   * @returns {boolean}
+   */
   static is (err) {
-    return err instanceof Error && err.name === TokenExpiredError.name
+    return err instanceof Error && err.name === TokenExpiredError.name && 'token' in err
   }
 }
 

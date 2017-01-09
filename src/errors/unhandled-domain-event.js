@@ -10,8 +10,14 @@ export class UnhandledDomainEventError {
     return `${this.message}: "${this.event}"`
   }
 
+  /**
+   * Returns true if x is of type UnhandledDomainEventError
+   *
+   * @param {object} err
+   * @returns {boolean}
+   */
   static is (err) {
-    return err instanceof Error && err.name === UnhandledDomainEventError.name
+    return err instanceof Error && err.name === UnhandledDomainEventError.name && 'event' in err
   }
 }
 

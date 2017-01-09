@@ -19,8 +19,15 @@ export class ValidationFailedError {
     return message
   }
 
+
+  /**
+   * Returns true if x is of type ValidationFailedError
+   *
+   * @param {object} err
+   * @returns {boolean}
+   */
   static is (err) {
-    return err instanceof Error && err.name === ValidationFailedError.name
+    return err instanceof Error && err.name === ValidationFailedError.name && 'data' in err && 'error' in err
   }
 }
 

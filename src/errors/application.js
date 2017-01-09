@@ -5,6 +5,13 @@ export class ApplicationError {
     this.stack = (new Error(this.message)).stack
   }
 
+
+  /**
+   * Returns true if x is of type ApplicationError
+   *
+   * @param {object} err
+   * @returns {boolean}
+   */
   static is (err) {
     return err instanceof Error && err.name === ApplicationError.name
   }

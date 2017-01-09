@@ -5,6 +5,12 @@ export class EntryAlreadyExistsError {
     this.stack = (new Error(this.message)).stack
   }
 
+  /**
+   * Returns true if x is of type EntryAlreadyExistsError
+   *
+   * @param {object} err
+   * @returns {boolean}
+   */
   static is (err) {
     return err instanceof Error && err.name === EntryAlreadyExistsError.name
   }

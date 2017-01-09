@@ -6,8 +6,14 @@ export class EntryDeletedError {
     this.stack = (new Error(this.message)).stack
   }
 
+  /**
+   * Returns true if x is of type EntryDeletedError
+   *
+   * @param {object} err
+   * @returns {boolean}
+   */
   static is (err) {
-    return err instanceof Error && err.name === EntryDeletedError.name
+    return err instanceof Error && err.name === EntryDeletedError.name && 'entry' in err
   }
 }
 

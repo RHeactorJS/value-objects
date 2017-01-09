@@ -14,8 +14,14 @@ export class AccessDeniedError {
     return msg
   }
 
+  /**
+   * Returns true if x is of type AccessDeniedError
+   *
+   * @param {object} err
+   * @returns {boolean}
+   */
   static is (err) {
-    return err instanceof Error && err.name === AccessDeniedError.name
+    return err instanceof Error && err.name === AccessDeniedError.name && 'resource' in err
   }
 }
 
