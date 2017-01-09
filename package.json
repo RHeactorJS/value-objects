@@ -40,9 +40,5 @@
     "semantic-release": "^6.3.2",
     "standard": "^8.6.0",
     "validate-commit-msg": "^2.6.1"
-  },
-  "files": [
-    "dist",
-    "README.md"
-  ]
+  }
 }
