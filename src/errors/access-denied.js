@@ -15,7 +15,7 @@ export class AccessDeniedError {
   }
 
   static is (err) {
-    return err instanceof Error && err.constructor.name === AccessDeniedError.name
+    return err instanceof Error && err.name === AccessDeniedError.name
   }
 }
 

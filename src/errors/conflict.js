@@ -6,7 +6,7 @@ export class ConflictError {
   }
 
   static is (err) {
-    return err instanceof Error && err.constructor.name === ConflictError.name
+    return err instanceof Error && err.name === ConflictError.name
   }
 }
 

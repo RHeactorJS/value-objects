@@ -20,7 +20,7 @@ export class ValidationFailedError {
   }
 
   static is (err) {
-    return err instanceof Error && err.constructor.name === ValidationFailedError.name
+    return err instanceof Error && err.name === ValidationFailedError.name
   }
 }
 
