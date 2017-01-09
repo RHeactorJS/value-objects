@@ -1,6 +1,6 @@
 export class EntryDeletedError {
   constructor (message, entry) {
-    this.name = EntryDeletedError.namae
+    this.name = EntryDeletedError.name
     this.message = message
     this.entry = entry
     this.stack = (new Error(this.message)).stack
