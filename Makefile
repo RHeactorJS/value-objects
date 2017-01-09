@@ -1,5 +1,6 @@
 .PHONY: dist
 
 dist:
-	rm -rf dist
-	./node_modules/.bin/babel src -d dist
+	rm -rf $@
+	./node_modules/.bin/babel src -d $@
+	cp README.md $@

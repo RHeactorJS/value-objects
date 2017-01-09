@@ -2,13 +2,13 @@
   "name": "rheactor-value-objects",
   "description": "A collection of value objects",
   "version": "0.0.0-development",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=testing mocha --compilers js:babel-register --reporter=dot --timeout=1350 test/\\*\\*/\\*.js",
     "test:coverage": "NODE_ENV=nyc babel src --out-dir instrumented-src > /dev/null && nyc --reporter=text-summary --reporter=lcov npm run test",
     "test:coverage-travis": "npm run test:coverage && codeclimate-test-reporter < ./coverage/lcov.info && rm -rf ./coverage",
     "lint": "standard",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "semantic-release": "semantic-release pre && cp package.json dist && npm publish dist && semantic-release post",
     "precommit": "npm run lint && npm test",
     "commitmsg": "validate-commit-msg"
   },
