@@ -35,7 +35,8 @@ describe('URIValue', () => {
         'http://142.42.1.1:8080/',
         'http://0.0.0.0',
         'http://10.1.1.0',
-        'http://10.1.1.1'
+        'http://10.1.1.1',
+        'https://github.com/RHeactor/nucleus/wiki/HttpProblem#409?title=ConflictError&detail=ConflictError%3A%20Already%20registered!'
       ].map(uri => {
         let u = new URIValue(uri)
         expect(u.toString()).to.equal(uri)
@@ -101,7 +102,10 @@ describe('URIValue', () => {
         'http://3628126748',
         'http://.www.foo.bar/',
         'http://www.foo.bar./',
-        'http://.www.foo.bar./'
+        'http://.www.foo.bar./',
+        // Unescaped fragment
+        'https://github.com/RHeactor/nucleus/wiki/HttpProblem#409?title=ConflictError&detail=ConflictError: Already registered!',
+        'http://foo.com/blah_blah#%'
       ].map(uri => {
         expect(() => {
           let u = new URIValue(uri)
