@@ -1,5 +1,5 @@
 import {TimestampValue, TimestampValueType, MaybeTimestampValueType} from '../src'
-import {ValidationFailedError} from 'rheactor-errors'
+import {ValidationFailedError} from '@resourcefulhumans/rheactor-errors'
 import {expect} from 'chai'
 
 /* global describe, it */
