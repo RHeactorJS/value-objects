@@ -1,7 +1,7 @@
 'use strict'
 
 import {TimestampValue, TimestampValueType} from '../src'
-import {ValidationFailedError} from '../src/errors'
+import {ValidationFailedError} from 'rheactor-errors'
 import {expect} from 'chai'
 
 /* global describe, it */

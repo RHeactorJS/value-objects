@@ -1,6 +1,6 @@
 'use strict'
 
-import {ValidationFailedError} from './errors'
+import {ValidationFailedError} from 'rheactor-errors'
 import {irreducible, String as StringType} from 'tcomb'
 
 export class SlugValue {

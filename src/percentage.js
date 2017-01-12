@@ -1,6 +1,6 @@
 'use strict'
 
-import {ValidationFailedError} from './errors'
+import {ValidationFailedError} from 'rheactor-errors'
 import {irreducible, union, String as StringType, Number as NumberType} from 'tcomb'
 
 const ScalarType = union([StringType, NumberType])

@@ -1,6 +1,6 @@
 'use strict'
 
-import {ValidationFailedError} from './errors'
+import {ValidationFailedError} from 'rheactor-errors'
 import {irreducible, Integer as IntegerType} from 'tcomb'
 
 export class TimestampValue {

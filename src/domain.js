@@ -1,6 +1,6 @@
 'use strict'
 
-import {ValidationFailedError} from './errors'
+import {ValidationFailedError} from 'rheactor-errors'
 import {String as StringType, irreducible} from 'tcomb'
 
 // http://stackoverflow.com/a/30007882

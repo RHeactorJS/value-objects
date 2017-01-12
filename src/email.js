@@ -1,6 +1,6 @@
 'use strict'
 
-import {ValidationFailedError} from './errors'
+import {ValidationFailedError} from 'rheactor-errors'
 import {String as StringType, irreducible} from 'tcomb'
 
 const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
