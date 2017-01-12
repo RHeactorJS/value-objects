@@ -1,6 +1,4 @@
-'use strict'
-
-import {EmailValue, EmailValueType} from '../src'
+import {EmailValue, EmailValueType, MaybeEmailValueType} from '../src'
 import {ValidationFailedError} from 'rheactor-errors'
 import {expect} from 'chai'
 
@@ -9,7 +7,7 @@ import {expect} from 'chai'
 
 describe('EmailValue', () => {
   describe('constructur()', function () {
-    it('should parse a email', (done) => {
+    it('should parse a email', () => {
       [
         'markus@resourceful-humans.com',
         'markus+example@resourceful-humans.com',
@@ -18,10 +16,9 @@ describe('EmailValue', () => {
         let d = new EmailValue(email)
         expect(d.toString()).to.equal(email)
       })
-      done()
     })
 
-    it('should not parse invalid emails', (done) => {
+    it('should not parse invalid emails', () => {
       [
         'not a email',
         'm@localhost' // not a second level domain
@@ -30,12 +27,11 @@ describe('EmailValue', () => {
           let e = new EmailValue(email)
         }).to.throw(ValidationFailedError)
       })
-      done()
     })
   })
 
-  describe('Type', () => {
-    it('should detect invalid types', (done) => {
+  describe('EmailValueType', () => {
+    it('should detect invalid types', () => {
       [
         {foo: 'bar'},
         null,
@@ -45,11 +41,16 @@ describe('EmailValue', () => {
           EmailValueType(v)
         }).to.throw(TypeError)
       })
-      done()
     })
-    it('should accept valid types', (done) => {
+    it('should accept valid types', () => {
       EmailValueType(new EmailValue('john@example.com'))
-      done()
+    })
+  })
+
+  describe('MaybeEmailValueType', () => {
+    it('should accept undefined types', () => {
+      MaybeEmailValueType()
+      MaybeEmailValueType(null)
     })
   })
 

@@ -1,6 +1,4 @@
-'use strict'
-
-import {SlugValue, SlugValueType} from '../src'
+import {SlugValue, SlugValueType, MaybeSlugValueType} from '../src'
 import {ValidationFailedError} from 'rheactor-errors'
 import {expect} from 'chai'
 
@@ -9,7 +7,7 @@ import {expect} from 'chai'
 
 describe('SlugValue', () => {
   describe('constructor()', function () {
-    it('should parse a slug', (done) => {
+    it('should parse a slug', () => {
       [
         'some-slug',
         'short'
@@ -17,10 +15,9 @@ describe('SlugValue', () => {
         let d = new SlugValue(slug)
         expect(d.toString()).to.equal(slug)
       })
-      done()
     })
 
-    it('should not parse invalid slugs', (done) => {
+    it('should not parse invalid slugs', () => {
       [
         'not a slug',
         'a-',         //  trailing dash
@@ -32,12 +29,11 @@ describe('SlugValue', () => {
           let s = new SlugValue(slug)
         }).to.throw(ValidationFailedError)
       })
-      done()
     })
   })
 
-  describe('Type', () => {
-    it('should detect invalid types', (done) => {
+  describe('SlugValueType', () => {
+    it('should detect invalid types', () => {
       [
         {foo: 'bar'},
         null,
@@ -47,11 +43,16 @@ describe('SlugValue', () => {
           SlugValueType(v)
         }).to.throw(TypeError)
       })
-      done()
     })
-    it('should accept valid types', (done) => {
+    it('should accept valid types', () => {
       SlugValueType(new SlugValue('slug'))
-      done()
+    })
+  })
+
+  describe('MaybeSlugValueType', () => {
+    it('should accept undefined types', () => {
+      MaybeSlugValueType()
+      MaybeSlugValueType(null)
     })
   })
 

@@ -1,7 +1,5 @@
-'use strict'
-
 import {ValidationFailedError} from 'rheactor-errors'
-import {irreducible, union, String as StringType, Number as NumberType} from 'tcomb'
+import {irreducible, union, String as StringType, Number as NumberType, maybe} from 'tcomb'
 
 const ScalarType = union([StringType, NumberType])
 
@@ -60,3 +58,4 @@ export class PercentageValue {
 }
 
 export const PercentageValueType = irreducible('PercentageValueType', x => PercentageValue.is(x))
+export const MaybePercentageValueType = maybe(PercentageValueType)

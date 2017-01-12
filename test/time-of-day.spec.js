@@ -1,6 +1,4 @@
-'use strict'
-
-import {TimeOfDayValue, TimeOfDayValueType} from '../src'
+import {TimeOfDayValue, TimeOfDayValueType, MaybeTimeOfDayValueType} from '../src'
 import {ValidationFailedError} from 'rheactor-errors'
 import {expect} from 'chai'
 
@@ -9,7 +7,7 @@ import {expect} from 'chai'
 
 describe('TimeOfDayValue', () => {
   describe('constructor()', function () {
-    it('should parse a time', (done) => {
+    it('should parse a time', () => {
       [
         '01:00',
         '02:00',
@@ -25,10 +23,9 @@ describe('TimeOfDayValue', () => {
         let u = new TimeOfDayValue(time)
         expect(u.toString()).to.equal(time)
       })
-      done()
     })
 
-    it('should not parse invalid times', (done) => {
+    it('should not parse invalid times', () => {
       [
         'bogus',
         17,
@@ -42,11 +39,10 @@ describe('TimeOfDayValue', () => {
           let u = new TimeOfDayValue(time)
         }).to.throw(ValidationFailedError)
       })
-      done()
     })
 
     describe('.hour()', () => {
-      it('should return the hour as a number', (done) => {
+      it('should return the hour as a number', () => {
         [
           ['01:00', 1],
           ['02:00', 2],
@@ -59,12 +55,11 @@ describe('TimeOfDayValue', () => {
           let u = new TimeOfDayValue(v[0])
           expect(u.hour()).to.equal(v[1])
         })
-        done()
       })
     })
 
     describe('.minute()', () => {
-      it('should return the minute as a number', (done) => {
+      it('should return the minute as a number', () => {
         [
           ['01:00', 0],
           ['02:01', 1],
@@ -73,13 +68,12 @@ describe('TimeOfDayValue', () => {
           let u = new TimeOfDayValue(v[0])
           expect(u.minute()).to.equal(v[1])
         })
-        done()
       })
     })
   })
 
-  describe('Type', () => {
-    it('should detect invalid types', (done) => {
+  describe('TimeOfDayValueType', () => {
+    it('should detect invalid types', () => {
       [
         {foo: 'bar'},
         null,
@@ -89,11 +83,16 @@ describe('TimeOfDayValue', () => {
           TimeOfDayValueType(v)
         }).to.throw(TypeError)
       })
-      done()
     })
-    it('should accept valid types', (done) => {
+    it('should accept valid types', () => {
       TimeOfDayValueType(new TimeOfDayValue('01:00'))
-      done()
+    })
+  })
+
+  describe('MaybeTimeOfDayValueType', () => {
+    it('should accept undefined types', () => {
+      MaybeTimeOfDayValueType()
+      MaybeTimeOfDayValueType(null)
     })
   })
 

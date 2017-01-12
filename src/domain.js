@@ -1,7 +1,5 @@
-'use strict'
-
 import {ValidationFailedError} from 'rheactor-errors'
-import {String as StringType, irreducible} from 'tcomb'
+import {String as StringType, irreducible, maybe} from 'tcomb'
 
 // http://stackoverflow.com/a/30007882
 const domainRegex = /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$/
@@ -59,3 +57,4 @@ export class DomainValue {
 }
 
 export const DomainValueType = irreducible('DomainValueType', x => DomainValue.is(x))
+export const MaybeDomainValueType = maybe(DomainValueType)

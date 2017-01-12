@@ -1,6 +1,4 @@
-'use strict'
-
-import {TimestampValue, TimestampValueType} from '../src'
+import {TimestampValue, TimestampValueType, MaybeTimestampValueType} from '../src'
 import {ValidationFailedError} from 'rheactor-errors'
 import {expect} from 'chai'
 
@@ -9,7 +7,7 @@ import {expect} from 'chai'
 
 describe('TimestampValue', () => {
   describe('constructor()', () => {
-    it('should accept a timestamp', (done) => {
+    it('should accept a timestamp', () => {
       [
         1,
         Date.now(),
@@ -18,44 +16,39 @@ describe('TimestampValue', () => {
         let u = new TimestampValue(timestamp)
         expect(u.toString()).to.equal('' + timestamp)
       })
-      done()
     })
 
-    it('should not parse invalid timestamps', (done) => {
+    it('should not parse invalid timestamps', () => {
       expect(() => {
         let u = new TimestampValue('bogus')
       }).to.throw(ValidationFailedError)
-      done()
     })
 
-    it('should convert date objects', (done) => {
+    it('should convert date objects', () => {
       const d = new Date()
       const t = new TimestampValue(d)
       expect(t.toString()).to.equal('' + d.getTime())
-      done()
     })
   })
 
   describe('.toString()', () => {
-    it('should return the timestamp as string', (done) => {
+    it('should return the timestamp as string', () => {
       const d = Date.now()
       const t = new TimestampValue(d)
       expect(t.toString()).to.equal('' + d)
-      done()
     })
   })
 
   describe('.valueOf()', () => {
-    it('should return the timestamp as number', (done) => {
+    it('should return the timestamp as number', () => {
       const d = Date.now()
       const t = new TimestampValue(d)
       expect(t.valueOf()).to.equal(d)
-      done()
     })
   })
 
-  describe('Type', () => {
-    it('should detect invalid types', (done) => {
+  describe('TimestampValueType', () => {
+    it('should detect invalid types', () => {
       [
         {foo: 'bar'},
         null,
@@ -65,11 +58,16 @@ describe('TimestampValue', () => {
           TimestampValueType(v)
         }).to.throw(TypeError)
       })
-      done()
     })
-    it('should accept valid types', (done) => {
+    it('should accept valid types', () => {
       TimestampValueType(new TimestampValue(Date.now()))
-      done()
+    })
+  })
+
+  describe('MaybeTimestampValueType', () => {
+    it('should accept undefined types', () => {
+      MaybeTimestampValueType()
+      MaybeTimestampValueType(null)
     })
   })
 

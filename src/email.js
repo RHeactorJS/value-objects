@@ -1,7 +1,5 @@
-'use strict'
-
 import {ValidationFailedError} from 'rheactor-errors'
-import {String as StringType, irreducible} from 'tcomb'
+import {String as StringType, irreducible, maybe} from 'tcomb'
 
 const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
@@ -55,3 +53,4 @@ export class EmailValue {
 }
 
 export const EmailValueType = irreducible('EmailValueType', x => EmailValue.is(x))
+export const MaybeEmailValueType = maybe(EmailValueType)

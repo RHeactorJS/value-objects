@@ -1,6 +1,4 @@
-'use strict'
-
-import {DomainValue, DomainValueType} from '../src'
+import {DomainValue, DomainValueType, MaybeDomainValueType} from '../src'
 import {ValidationFailedError} from 'rheactor-errors'
 import {expect} from 'chai'
 
@@ -9,7 +7,7 @@ import {expect} from 'chai'
 
 describe('DomainValue', () => {
   describe('constructor()', function () {
-    it('should parse a domain', (done) => {
+    it('should parse a domain', () => {
       [
         'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijk.com', // 63 chars
         'rh.com', // two letter
@@ -21,10 +19,9 @@ describe('DomainValue', () => {
         let d = new DomainValue(domain)
         expect(d.toString()).to.equal(domain)
       })
-      done()
     })
 
-    it('should not parse invalid domains', (done) => {
+    it('should not parse invalid domains', () => {
       [
         'bogus', // No second level
         'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl.com', //  64 chars
@@ -36,12 +33,11 @@ describe('DomainValue', () => {
           let d = new DomainValue(domain)
         }, `It should not parse ${domain} as a domain`).to.throw(ValidationFailedError)
       })
-      done()
     })
   })
 
   describe('DomainValueType', () => {
-    it('should detect invalid types', (done) => {
+    it('should detect invalid types', () => {
       [
         {foo: 'bar'},
         null,
@@ -51,11 +47,16 @@ describe('DomainValue', () => {
           DomainValueType(v)
         }).to.throw(TypeError)
       })
-      done()
     })
-    it('should accept valid types', (done) => {
+    it('should accept valid types', () => {
       DomainValueType(new DomainValue('example.com'))
-      done()
+    })
+  })
+
+  describe('MaybeDomainValueType', () => {
+    it('should accept undefined types', () => {
+      MaybeDomainValueType()
+      MaybeDomainValueType(null)
     })
   })
 
@@ -68,4 +69,3 @@ describe('DomainValue', () => {
     })
   })
 })
-

@@ -1,7 +1,5 @@
-'use strict'
-
 import {ValidationFailedError} from 'rheactor-errors'
-import {irreducible, String as StringType} from 'tcomb'
+import {irreducible, String as StringType, maybe} from 'tcomb'
 
 export class SlugValue {
   /**
@@ -53,3 +51,4 @@ export class SlugValue {
 }
 
 export const SlugValueType = irreducible('SlugValueType', x => SlugValue.is(x))
+export const MaybeSlugValueType = maybe(SlugValueType)

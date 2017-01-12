@@ -1,7 +1,5 @@
-'use strict'
-
 import {ValidationFailedError} from 'rheactor-errors'
-import {irreducible, Integer as IntegerType} from 'tcomb'
+import {irreducible, Integer as IntegerType, maybe} from 'tcomb'
 
 export class TimestampValue {
 
@@ -60,4 +58,4 @@ export class TimestampValue {
 }
 
 export const TimestampValueType = irreducible('TimestampValueType', x => TimestampValue.is(x))
-
+export const MaybeTimestampValueType = maybe(TimestampValueType)

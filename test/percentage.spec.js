@@ -1,6 +1,4 @@
-'use strict'
-
-import {PercentageValue, PercentageValueType} from '../src'
+import {PercentageValue, PercentageValueType, MaybePercentageValueType} from '../src'
 import {ValidationFailedError} from 'rheactor-errors'
 import {expect} from 'chai'
 
@@ -43,8 +41,8 @@ describe('PercentageValue', () => {
     })
   })
 
-  describe('Type', () => {
-    it('should detect invalid types', (done) => {
+  describe('PercentageValueType', () => {
+    it('should detect invalid types', () => {
       [
         {foo: 'bar'},
         null,
@@ -54,11 +52,16 @@ describe('PercentageValue', () => {
           PercentageValueType(v)
         }).to.throw(TypeError)
       })
-      done()
     })
-    it('should accept valid types', (done) => {
+    it('should accept valid types', () => {
       PercentageValueType(new PercentageValue(75))
-      done()
+    })
+  })
+
+  describe('MaybePercentageValueType', () => {
+    it('should accept undefined types', () => {
+      MaybePercentageValueType()
+      MaybePercentageValueType(null)
     })
   })
 

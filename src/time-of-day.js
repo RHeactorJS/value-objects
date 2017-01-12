@@ -1,7 +1,5 @@
-'use strict'
-
 import {ValidationFailedError} from 'rheactor-errors'
-import {irreducible, String as StringType} from 'tcomb'
+import {irreducible, String as StringType, maybe} from 'tcomb'
 
 export class TimeOfDayValue {
   /**
@@ -68,3 +66,4 @@ export class TimeOfDayValue {
 }
 
 export const TimeOfDayValueType = irreducible('TimeOfDayValueValueType', x => TimeOfDayValue.is(x))
+export const MaybeTimeOfDayValueType = maybe(TimeOfDayValueType)

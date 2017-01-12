@@ -1,6 +1,4 @@
-'use strict'
-
-import {URIValue, URIValueType} from '../src'
+import {URIValue, URIValueType, MaybeURIValueType} from '../src'
 import {ValidationFailedError} from 'rheactor-errors'
 import {expect} from 'chai'
 
@@ -11,7 +9,7 @@ import {expect} from 'chai'
 
 describe('URIValue', () => {
   describe('constructor()', function () {
-    it('should parse a URI', (done) => {
+    it('should parse a URI', () => {
       [
         'https://example.com',
         'https://example.com/dakjh/sadkjh.html',
@@ -41,10 +39,9 @@ describe('URIValue', () => {
         let u = new URIValue(uri)
         expect(u.toString()).to.equal(uri)
       })
-      done()
     })
 
-    it('should not parse invalid URIs', (done) => {
+    it('should not parse invalid URIs', () => {
       [
         'bogus',
         17,
@@ -111,7 +108,6 @@ describe('URIValue', () => {
           let u = new URIValue(uri)
         }, `this should be an invalid URI: "${uri}"`).to.throw(ValidationFailedError)
       })
-      done()
     })
     describe('slashless()', () => {
       it('should return a copy with out a slash', () => {
@@ -121,8 +117,8 @@ describe('URIValue', () => {
     })
   })
 
-  describe('Type()', () => {
-    it('should detect invalid types', (done) => {
+  describe('URIValueType', () => {
+    it('should detect invalid types', () => {
       [
         {foo: 'bar'},
         null,
@@ -132,11 +128,16 @@ describe('URIValue', () => {
           URIValueType(v)
         }).to.throw(TypeError)
       })
-      done()
     })
-    it('should accept valid types', (done) => {
+    it('should accept valid types', () => {
       URIValueType(new URIValue('https://example.com'))
-      done()
+    })
+  })
+
+  describe('MaybeURIValueType', () => {
+    it('should accept undefined types', () => {
+      MaybeURIValueType()
+      MaybeURIValueType(null)
     })
   })
 
