@@ -19,7 +19,7 @@ export class URIValue {
     } catch (e) {
       throw new ValidationFailedError(`Not a URI: "${uri}"`, uri, e)
     }
-    if (!uriRegex.test(uri)) {
+    if (!URIValue.stringIs(uri)) {
       throw new ValidationFailedError('Not a URI: ' + uri)
     }
     this.uri = uri
@@ -47,6 +47,15 @@ export class URIValue {
    */
   slashless () {
     return new URIValue(this.uri.replace(/\/+$/, ''))
+  }
+
+  /**
+   * Returns true if str is an URI
+   * @param {String} str
+   * @returns {boolean}
+   */
+  static stringIs (str) {
+    return uriRegex.test(str)
   }
 
   /**
