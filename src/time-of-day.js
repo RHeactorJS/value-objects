@@ -50,7 +50,7 @@ export class TimeOfDayValue {
    * @returns {boolean}
    */
   equals (timeOfDay) {
-    TimeOfDayValueType(timeOfDay)
+    TimeOfDayValueType(timeOfDay, ['TimeOfDayValue.equals()', 'timeOfDay:TimeOfDayValue'])
     return this.timeOfDay === timeOfDay.toString()
   }
 
@@ -65,5 +65,5 @@ export class TimeOfDayValue {
   }
 }
 
-export const TimeOfDayValueType = irreducible('TimeOfDayValueValueType', x => TimeOfDayValue.is(x))
+export const TimeOfDayValueType = irreducible('TimeOfDayValueType', x => TimeOfDayValue.is(x))
 export const MaybeTimeOfDayValueType = maybe(TimeOfDayValueType)
