@@ -2,6 +2,7 @@ import {ValidationFailedError} from '@resourcefulhumans/rheactor-errors'
 import {irreducible, union, String as StringType, Number as NumberType, maybe} from 'tcomb'
 
 const ScalarType = union([StringType, NumberType])
+const percentageRegex = /^-?[0-9]+%$/
 
 export class PercentageValue {
   /**
@@ -44,6 +45,15 @@ export class PercentageValue {
   equals (percentage) {
     PercentageValueType(percentage)
     return this.percentage === percentage.valueOf()
+  }
+
+  /**
+   * Returns true if str is a percentage value
+   * @param {String} str
+   * @returns {boolean}
+   */
+  static stringIs (str) {
+    return percentageRegex.test(str)
   }
 
   /**

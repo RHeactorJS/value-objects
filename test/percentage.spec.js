@@ -5,20 +5,27 @@ import {expect} from 'chai'
 /* global describe, it */
 /* eslint no-unused-vars: 0 */
 
+const goodPercentages = [
+  [0, '0%'],
+  [50, '50%'],
+  [33.3, '33%'],
+  [100, '100%'],
+  ['0', '0%', 0],
+  ['100', '100%', 100],
+  [-1, '-1%'],
+  [101, '101%'],
+  [-100, '-100%']
+]
+
+const badPercentages = [
+  'bogus',
+  ''
+]
+
 describe('PercentageValue', () => {
   describe('constructor()', () => {
     it('should accept a percentage', () => {
-      [
-        [0, '0%'],
-        [50, '50%'],
-        [33.3, '33%'],
-        [100, '100%'],
-        ['0', '0%', 0],
-        ['100', '100%', 100],
-        [-1, '-1%'],
-        [101, '101%'],
-        [-100, '-100%']
-      ].map(data => {
+      goodPercentages.map(data => {
         let u = new PercentageValue(data[0])
         expect(u.toString()).to.equal(data[1])
         expect(u.valueOf()).to.equal(typeof data[2] !== 'undefined' ? data[2] : data[0])
@@ -26,10 +33,7 @@ describe('PercentageValue', () => {
     })
 
     it('should not parse invalid percentages', () => {
-      [
-        'bogus',
-        ''
-      ].map(v => {
+      badPercentages.map(v => {
         expect(() => {
           let u = new PercentageValue(v)
         }, JSON.stringify(v) + ' should not be accepted as a valid value').to.throw(ValidationFailedError)
@@ -71,6 +75,15 @@ describe('PercentageValue', () => {
     })
     it('should return false for different percentages', () => {
       expect(new PercentageValue(33).equals(new PercentageValue(33.1))).to.equal(false)
+    })
+  })
+
+  describe('stringIs()', () => {
+    it('should accept good percentages as strings', () => {
+      goodPercentages.map(percentage => expect(PercentageValue.stringIs(percentage[1], `${percentage[1]} should be accepted`)).to.equal(true))
+    })
+    it('should not accept bad percentages as strings', () => {
+      badPercentages.map(percentage => expect(PercentageValue.stringIs(percentage, `${percentage[1]} should not be accepted`)).to.equal(false))
     })
   })
 })
