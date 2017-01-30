@@ -10,6 +10,7 @@ describe('DomainValue', () => {
     it('should parse a domain', () => {
       [
         'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijk.com', // 63 chars
+        'staRHs.example', // case-insensitive
         'rh.com', // two letter
         'r.com', // one letter
         'r-h.com', // with dash
@@ -17,7 +18,7 @@ describe('DomainValue', () => {
         'xn--brger-kva.de' // bürger.de
       ].map(domain => {
         let d = new DomainValue(domain)
-        expect(d.toString()).to.equal(domain)
+        expect(d.toString()).to.equal(domain.toLowerCase())
       })
     })
 
@@ -61,10 +62,13 @@ describe('DomainValue', () => {
   })
 
   describe('.equals()', () => {
-    it('should return true for the same emails', () => {
+    it('should return true for the same domains', () => {
       expect(new DomainValue('resourceful-humans.com').equals(new DomainValue('resourceful-humans.com'))).to.equal(true)
     })
-    it('should return false for different emails', () => {
+    it('should return true for the same domains (acse-insensitive)', () => {
+      expect(new DomainValue('staRHs.example').equals(new DomainValue('starhs.example'))).to.equal(true)
+    })
+    it('should return false for different domains', () => {
       expect(new DomainValue('resourceful-humans.com').equals(new DomainValue('resourceful-humans.de'))).to.equal(false)
     })
   })

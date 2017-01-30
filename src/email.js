@@ -1,7 +1,7 @@
 import {ValidationFailedError} from '@resourcefulhumans/rheactor-errors'
 import {String as StringType, irreducible, maybe} from 'tcomb'
 
-const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-z\-0-9]+\.)+[a-z]{2,}))$/
 
 export class EmailValue {
   /**
@@ -18,7 +18,6 @@ export class EmailValue {
       throw new ValidationFailedError(`Not an email: "${email}"`, email, e)
     }
     email = email.toLowerCase()
-    // http://emailregex.com/
     if (!emailRegex.test(email)) {
       throw new ValidationFailedError('Not an email: ' + email)
     }

@@ -20,6 +20,7 @@ export class DomainValue {
     } catch (e) {
       throw new ValidationFailedError(`Not a domain: "${domain}"`, domain, e)
     }
+    domain = domain.toLowerCase()
     if (!domainRegex.test(domain)) {
       throw new ValidationFailedError('Not a domain: ' + domain)
     }

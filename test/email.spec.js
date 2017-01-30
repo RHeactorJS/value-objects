@@ -11,10 +11,11 @@ describe('EmailValue', () => {
       [
         'markus@resourceful-humans.com',
         'markus+example@resourceful-humans.com',
+        'Markus@Resourceful-Humans.com',
         'm@cto.hiv'
       ].map(email => {
         let d = new EmailValue(email)
-        expect(d.toString()).to.equal(email)
+        expect(d.toString()).to.equal(email.toLowerCase())
       })
     })
 
@@ -57,6 +58,9 @@ describe('EmailValue', () => {
   describe('.equals()', () => {
     it('should return true for the same emails', () => {
       expect(new EmailValue('markus@resourceful-humans.com').equals(new EmailValue('markus@resourceful-humans.com'))).to.equal(true)
+    })
+    it('should return true for the same emails (case insensitive)', () => {
+      expect(new EmailValue('Markus@Resourceful-Humans.com').equals(new EmailValue('markus@resourceful-humans.com'))).to.equal(true)
     })
     it('should return false for different emails', () => {
       expect(new EmailValue('markus@resourceful-humans.com').equals(new EmailValue('markus@resourceful-humans.de'))).to.equal(false)
