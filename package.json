@@ -22,7 +22,7 @@
     "url": "https://github.com/ResourcefulHumans/rheactor-value-objects/issues"
   },
   "homepage": "https://github.com/ResourcefulHumans/rheactor-value-objects#readme",
-  "dependencies": {
+  "peerDependencies": {
     "tcomb": "^3.2.13",
     "@resourcefulhumans/rheactor-errors": "1.x"
   },
