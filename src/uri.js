@@ -50,6 +50,14 @@ export class URIValue {
   }
 
   /**
+   * Returns a copy of the instance with the given string appended
+   * @returns {URIValue}
+   */
+  append (str) {
+    return new URIValue(`${this}${str}`)
+  }
+
+  /**
    * Returns true if str is an URI
    * @param {String} str
    * @returns {boolean}

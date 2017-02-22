@@ -163,4 +163,13 @@ describe('URIValue', () => {
       badURIs.map(uri => expect(URIValue.stringIs(uri)).to.equal(false))
     })
   })
+
+  describe('append()', () => {
+    it('should return a new URL with the appended string', () => {
+      const u = new URIValue('https://example.com')
+      const u2 = u.append('/status')
+      expect(u2.toString(), 'it should concatenate the string to the URI').to.equal('https://example.com/status')
+      expect(u, 'it should create a new instance').to.not.equal(u2)
+    })
+  })
 })
