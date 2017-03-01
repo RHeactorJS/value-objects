@@ -2,7 +2,6 @@ import {ValidationFailedError} from '@resourcefulhumans/rheactor-errors'
 import {irreducible, Integer as IntegerType, maybe} from 'tcomb'
 
 export class TimestampValue {
-
   /**
    * @param {Number|Date|TimestampValue} timestamp
    * @constructor
