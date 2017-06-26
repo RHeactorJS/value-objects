@@ -1,13 +1,12 @@
 # value-objects
 
+[![npm version](https://img.shields.io/npm/v/@rheactorjs/value-objects.svg)](https://www.npmjs.com/package/@rheactorjs/value-objects)
 [![Build Status](https://travis-ci.org/RHeactorJS/value-objects.svg?branch=master)](https://travis-ci.org/RHeactorJS/value-objects)
 [![monitored by greenkeeper.io](https://img.shields.io/badge/greenkeeper.io-monitored-brightgreen.svg)](http://greenkeeper.io/) 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![semantic-release](https://img.shields.io/badge/semver-semantic%20release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Test Coverage](https://codeclimate.com/github/RHeactorJS/value-objects/badges/coverage.svg)](https://codeclimate.com/github/RHeactorJS/value-objects/coverage)
 [![Code Climate](https://codeclimate.com/github/RHeactorJS/value-objects/badges/gpa.svg)](https://codeclimate.com/github/RHeactorJS/value-objects)
-
-[![NPM](https://nodei.co/npm/value-objects.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/value-objects/)
 
 A collection of value objects
 
