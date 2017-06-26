@@ -31,7 +31,7 @@ const goodURIs = [
   'http://0.0.0.0',
   'http://10.1.1.0',
   'http://10.1.1.1',
-  'https://github.com/RHeactor/nucleus/wiki/HttpProblem#409?title=ConflictError&detail=ConflictError%3A%20Already%20registered!',
+  'https://github.com/RHeactorJS/nucleus/wiki/HttpProblem#409?title=ConflictError&detail=ConflictError%3A%20Already%20registered!',
   'https://static.wixstatic.com/media/dbd157_7aee6.png/v1/fill/w_216,h_217,al_c,usm_0.66_1.00_0.01/dbd157_7aee6.png'
 ]
 
@@ -94,7 +94,7 @@ const badURIs = [
   'http://www.foo.bar./',
   'http://.www.foo.bar./',
   // Unescaped fragment
-  'https://github.com/RHeactor/nucleus/wiki/HttpProblem#409?title=ConflictError&detail=ConflictError: Already registered!',
+  'https://github.com/RHeactorJS/nucleus/wiki/HttpProblem#409?title=ConflictError&detail=ConflictError: Already registered!',
   'http://foo.com/blah_blah#%'
 ]
 
