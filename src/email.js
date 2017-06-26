@@ -1,4 +1,4 @@
-import {ValidationFailedError} from '@resourcefulhumans/rheactor-errors'
+import {ValidationFailedError} from '@rheactorjs/errors'
 import {String as StringType, irreducible, maybe} from 'tcomb'
 
 const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-z\-0-9]+\.)+[a-z]{2,}))$/

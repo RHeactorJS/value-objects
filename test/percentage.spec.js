@@ -1,5 +1,5 @@
 import {PercentageValue, PercentageValueType, MaybePercentageValueType} from '../src'
-import {ValidationFailedError} from '@resourcefulhumans/rheactor-errors'
+import {ValidationFailedError} from '@rheactorjs/errors'
 import {expect} from 'chai'
 
 /* global describe, it */

@@ -1,5 +1,5 @@
 {
-  "name": "rheactor-value-objects",
+  "name": "@rheactorjs/value-objects",
   "description": "A collection of value objects",
   "version": "0.0.0-development",
   "main": "dist/index.js",
@@ -12,19 +12,22 @@
     "precommit": "npm run lint && npm test",
     "commitmsg": "validate-commit-msg"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ResourcefulHumans/rheactor-value-objects.git"
+    "url": "https://github.com/RHeactorJS/value-objects.git"
   },
   "author": "Resourceful Humans GmbH <info@resourceful-humans.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ResourcefulHumans/rheactor-value-objects/issues"
+    "url": "https://github.com/RHeactorJS/value-objects/issues"
   },
-  "homepage": "https://github.com/ResourcefulHumans/rheactor-value-objects#readme",
+  "homepage": "https://github.com/RHeactorJS/value-objects#readme",
   "peerDependencies": {
     "tcomb": "^3.2.13",
-    "@resourcefulhumans/rheactor-errors": "1.x"
+    "@rheactorjs/errors": "1.x"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

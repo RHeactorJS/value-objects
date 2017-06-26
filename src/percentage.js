@@ -1,4 +1,4 @@
-import {ValidationFailedError} from '@resourcefulhumans/rheactor-errors'
+import {ValidationFailedError} from '@rheactorjs/errors'
 import {irreducible, union, String as StringType, Number as NumberType, maybe} from 'tcomb'
 
 const ScalarType = union([StringType, NumberType])

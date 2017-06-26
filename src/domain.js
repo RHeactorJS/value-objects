@@ -1,4 +1,4 @@
-import {ValidationFailedError} from '@resourcefulhumans/rheactor-errors'
+import {ValidationFailedError} from '@rheactorjs/errors'
 import {String as StringType, irreducible, maybe} from 'tcomb'
 
 // http://stackoverflow.com/a/30007882

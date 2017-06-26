@@ -1,4 +1,4 @@
-import {ValidationFailedError} from '@resourcefulhumans/rheactor-errors'
+import {ValidationFailedError} from '@rheactorjs/errors'
 import {irreducible, String as StringType, maybe} from 'tcomb'
 
 export class TimeOfDayValue {

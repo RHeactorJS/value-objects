@@ -1,13 +1,13 @@
-# rheactor-value-objects
+# value-objects
 
-[![Build Status](https://travis-ci.org/ResourcefulHumans/rheactor-value-objects.svg?branch=master)](https://travis-ci.org/ResourcefulHumans/rheactor-value-objects)
+[![Build Status](https://travis-ci.org/RHeactorJS/value-objects.svg?branch=master)](https://travis-ci.org/RHeactorJS/value-objects)
 [![monitored by greenkeeper.io](https://img.shields.io/badge/greenkeeper.io-monitored-brightgreen.svg)](http://greenkeeper.io/) 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![semantic-release](https://img.shields.io/badge/semver-semantic%20release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![Test Coverage](https://codeclimate.com/github/ResourcefulHumans/rheactor-value-objects/badges/coverage.svg)](https://codeclimate.com/github/ResourcefulHumans/rheactor-value-objects/coverage)
-[![Code Climate](https://codeclimate.com/github/ResourcefulHumans/rheactor-value-objects/badges/gpa.svg)](https://codeclimate.com/github/ResourcefulHumans/rheactor-value-objects)
+[![Test Coverage](https://codeclimate.com/github/RHeactorJS/value-objects/badges/coverage.svg)](https://codeclimate.com/github/RHeactorJS/value-objects/coverage)
+[![Code Climate](https://codeclimate.com/github/RHeactorJS/value-objects/badges/gpa.svg)](https://codeclimate.com/github/RHeactorJS/value-objects)
 
-[![NPM](https://nodei.co/npm/rheactor-value-objects.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/rheactor-value-objects/)
+[![NPM](https://nodei.co/npm/value-objects.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/value-objects/)
 
 A collection of value objects
 
@@ -22,7 +22,7 @@ the value-objects package will create an instance that Node.js thinks to be from
 one referenced in this package's `uri.js`
 
     # app.js
-    const URIValue = require('rheactor-value-objects/uri')
+    const URIValue = require('value-objects/uri')
     let u = new URIValue(…)
     URIValue.Type(u) // will fail
     
