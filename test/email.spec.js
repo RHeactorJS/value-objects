@@ -12,7 +12,8 @@ describe('EmailValue', () => {
         'markus@resourceful-humans.com',
         'markus+example@resourceful-humans.com',
         'Markus@Resourceful-Humans.com',
-        'm@cto.hiv'
+        'm@cto.hiv',
+        'm@example.co.uk'
       ].map(email => {
         let d = new EmailValue(email)
         expect(d.toString()).to.equal(email.toLowerCase())
