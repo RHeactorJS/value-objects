@@ -25,7 +25,7 @@
     "url": "https://github.com/RHeactorJS/value-objects/issues"
   },
   "homepage": "https://github.com/RHeactorJS/value-objects#readme",
-  "peerDependencies": {
+  "dependencies": {
     "tcomb": "^3.2.13",
     "@rheactorjs/errors": "1.x"
   },
