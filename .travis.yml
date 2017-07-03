@@ -4,14 +4,9 @@ cache:
     - node_modules
 notifications:
   email: false
-node_js:
-  - 'stable'
-before_install:
-  - npm install -g npm-install-peers
 install:
   - npm install
   - npm prune
-  - npm-install-peers
 script:
   - npm run lint
   - npm run test:coverage-travis
@@ -21,3 +16,7 @@ after_success:
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
+matrix:
+  include:
+    - node_js: 'node'
+    - node_js: '6'
