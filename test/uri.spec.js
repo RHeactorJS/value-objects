@@ -1,8 +1,7 @@
 import {URIValue, URIValueType, MaybeURIValueType} from '../src'
 import {ValidationFailedError} from '@rheactorjs/errors'
-import {expect} from 'chai'
 
-/* global describe, it */
+/* global describe expect test it */
 /* eslint no-unused-vars: 0 */
 
 // Test data from https://mathiasbynens.be/demo/url-regex
@@ -103,21 +102,23 @@ describe('URIValue', () => {
     it('should parse a URI', () => {
       goodURIs.map(uri => {
         let u = new URIValue(uri)
-        expect(u.toString()).to.equal(uri)
+        expect(u.toString()).toEqual(uri)
       })
     })
 
-    it('should not parse invalid URIs', () => {
+    describe('should not parse invalid URIs', () => {
       badURIs.map(uri => {
-        expect(() => {
-          let u = new URIValue(uri)
-        }, `this should be an invalid URI: "${uri}"`).to.throw(ValidationFailedError)
+        test(`this should be an invalid URI: "${uri}"`, () => {
+          expect(() => {
+            let u = new URIValue(uri)
+          }).toThrow(ValidationFailedError)
+        })
       })
     })
     describe('slashless()', () => {
       it('should return a copy with out a slash', () => {
-        expect((new URIValue('https://example.com/')).slashless().toString()).to.equal('https://example.com')
-        expect((new URIValue('https://example.com')).slashless().toString()).to.equal('https://example.com')
+        expect((new URIValue('https://example.com/')).slashless().toString()).toEqual('https://example.com')
+        expect((new URIValue('https://example.com')).slashless().toString()).toEqual('https://example.com')
       })
     })
   })
@@ -131,7 +132,7 @@ describe('URIValue', () => {
       ].map(v => {
         expect(() => {
           URIValueType(v)
-        }).to.throw(TypeError)
+        }).toThrow(TypeError)
       })
     })
     it('should accept valid types', () => {
@@ -148,28 +149,32 @@ describe('URIValue', () => {
 
   describe('.equals()', () => {
     it('should return true for the same URLs', () => {
-      expect(new URIValue('https://example.com').equals(new URIValue('https://example.com'))).to.equal(true)
+      expect(new URIValue('https://example.com').equals(new URIValue('https://example.com'))).toEqual(true)
     })
     it('should return false for different URLs', () => {
-      expect(new URIValue('https://example.com').equals(new URIValue('http://example.com'))).to.equal(false)
+      expect(new URIValue('https://example.com').equals(new URIValue('http://example.com'))).toEqual(false)
     })
   })
 
   describe('stringIs()', () => {
     it('should accept good URIs as strings', () => {
-      goodURIs.map(uri => expect(URIValue.stringIs(uri)).to.equal(true))
+      goodURIs.map(uri => expect(URIValue.stringIs(uri)).toEqual(true))
     })
     it('should not accept bad URIs as strings', () => {
-      badURIs.map(uri => expect(URIValue.stringIs(uri)).to.equal(false))
+      badURIs.map(uri => expect(URIValue.stringIs(uri)).toEqual(false))
     })
   })
 
   describe('append()', () => {
-    it('should return a new URL with the appended string', () => {
+    describe('should return a new URL with the appended string', () => {
       const u = new URIValue('https://example.com')
       const u2 = u.append('/status')
-      expect(u2.toString(), 'it should concatenate the string to the URI').to.equal('https://example.com/status')
-      expect(u, 'it should create a new instance').to.not.equal(u2)
+      it('should concatenate the string to the URI', () => {
+        expect(u2.toString()).toEqual('https://example.com/status')
+      })
+      it('should create a new instance', () => {
+        expect(u).not.toEqual(u2)
+      })
     })
   })
 })

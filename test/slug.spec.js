@@ -1,8 +1,7 @@
 import {SlugValue, SlugValueType, MaybeSlugValueType} from '../src'
 import {ValidationFailedError} from '@rheactorjs/errors'
-import {expect} from 'chai'
 
-/* global describe, it */
+/* global describe expect, it */
 /* eslint no-unused-vars: 0 */
 
 describe('SlugValue', () => {
@@ -13,7 +12,7 @@ describe('SlugValue', () => {
         'short'
       ].map(slug => {
         let d = new SlugValue(slug)
-        expect(d.toString()).to.equal(slug)
+        expect(d.toString()).toEqual(slug)
       })
     })
 
@@ -27,7 +26,7 @@ describe('SlugValue', () => {
       ].map(slug => {
         expect(() => {
           let s = new SlugValue(slug)
-        }).to.throw(ValidationFailedError)
+        }).toThrow(ValidationFailedError)
       })
     })
   })
@@ -41,7 +40,7 @@ describe('SlugValue', () => {
       ].map(v => {
         expect(() => {
           SlugValueType(v)
-        }).to.throw(TypeError)
+        }).toThrow(TypeError)
       })
     })
     it('should accept valid types', () => {
@@ -58,10 +57,10 @@ describe('SlugValue', () => {
 
   describe('.equals()', () => {
     it('should return true for the same slugs', () => {
-      expect(new SlugValue('some-slug').equals(new SlugValue('some-slug'))).to.equal(true)
+      expect(new SlugValue('some-slug').equals(new SlugValue('some-slug'))).toEqual(true)
     })
     it('should return false for different slugs', () => {
-      expect(new SlugValue('some-slug').equals(new SlugValue('some-other-slug'))).to.equal(false)
+      expect(new SlugValue('some-slug').equals(new SlugValue('some-other-slug'))).toEqual(false)
     })
   })
 })

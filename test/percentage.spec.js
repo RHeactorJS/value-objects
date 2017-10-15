@@ -1,8 +1,7 @@
 import {PercentageValue, PercentageValueType, MaybePercentageValueType} from '../src'
 import {ValidationFailedError} from '@rheactorjs/errors'
-import {expect} from 'chai'
 
-/* global describe, it */
+/* global describe expect, it */
 /* eslint no-unused-vars: 0 */
 
 const goodPercentages = [
@@ -27,21 +26,23 @@ describe('PercentageValue', () => {
     it('should accept a percentage', () => {
       goodPercentages.map(data => {
         let u = new PercentageValue(data[0])
-        expect(u.toString()).to.equal(data[1])
-        expect(u.valueOf()).to.equal(typeof data[2] !== 'undefined' ? data[2] : data[0])
+        expect(u.toString()).toEqual(data[1])
+        expect(u.valueOf()).toEqual(typeof data[2] !== 'undefined' ? data[2] : data[0])
       })
     })
 
-    it('should not parse invalid percentages', () => {
+    describe('should not parse invalid percentages', () => {
       badPercentages.map(v => {
-        expect(() => {
-          let u = new PercentageValue(v)
-        }, JSON.stringify(v) + ' should not be accepted as a valid value').to.throw(ValidationFailedError)
+        it(JSON.stringify(v) + ' should not be accepted as a valid value', () => {
+          expect(() => {
+            let u = new PercentageValue(v)
+          }).toThrow(ValidationFailedError)
+        })
       })
     })
 
     it('should parse itself', () => {
-      expect(new PercentageValue(new PercentageValue(33.33)).toString()).to.equal('33%')
+      expect(new PercentageValue(new PercentageValue(33.33)).toString()).toEqual('33%')
     })
   })
 
@@ -54,7 +55,7 @@ describe('PercentageValue', () => {
       ].map(v => {
         expect(() => {
           PercentageValueType(v)
-        }).to.throw(TypeError)
+        }).toThrow(TypeError)
       })
     })
     it('should accept valid types', () => {
@@ -71,19 +72,19 @@ describe('PercentageValue', () => {
 
   describe('.equals()', () => {
     it('should return true for the same percentages', () => {
-      expect(new PercentageValue(33).equals(new PercentageValue(33))).to.equal(true)
+      expect(new PercentageValue(33).equals(new PercentageValue(33))).toEqual(true)
     })
     it('should return false for different percentages', () => {
-      expect(new PercentageValue(33).equals(new PercentageValue(33.1))).to.equal(false)
+      expect(new PercentageValue(33).equals(new PercentageValue(33.1))).toEqual(false)
     })
   })
 
   describe('stringIs()', () => {
     it('should accept good percentages as strings', () => {
-      goodPercentages.map(percentage => expect(PercentageValue.stringIs(percentage[1], `${percentage[1]} should be accepted`)).to.equal(true))
+      goodPercentages.map(percentage => expect(PercentageValue.stringIs(percentage[1], `${percentage[1]} should be accepted`)).toEqual(true))
     })
     it('should not accept bad percentages as strings', () => {
-      badPercentages.map(percentage => expect(PercentageValue.stringIs(percentage, `${percentage[1]} should not be accepted`)).to.equal(false))
+      badPercentages.map(percentage => expect(PercentageValue.stringIs(percentage, `${percentage[1]} should not be accepted`)).toEqual(false))
     })
   })
 })

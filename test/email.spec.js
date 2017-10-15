@@ -1,8 +1,7 @@
 import {EmailValue, EmailValueType, MaybeEmailValueType} from '../src'
 import {ValidationFailedError} from '@rheactorjs/errors'
-import {expect} from 'chai'
 
-/* global describe, it */
+/* global describe expect, it */
 /* eslint no-unused-vars: 0 */
 
 describe('EmailValue', () => {
@@ -16,7 +15,7 @@ describe('EmailValue', () => {
         'm@example.co.uk'
       ].map(email => {
         let d = new EmailValue(email)
-        expect(d.toString()).to.equal(email.toLowerCase())
+        expect(d.toString()).toEqual(email.toLowerCase())
       })
     })
 
@@ -27,7 +26,7 @@ describe('EmailValue', () => {
       ].map(email => {
         expect(() => {
           let e = new EmailValue(email)
-        }).to.throw(ValidationFailedError)
+        }).toThrow(ValidationFailedError)
       })
     })
   })
@@ -41,7 +40,7 @@ describe('EmailValue', () => {
       ].map(v => {
         expect(() => {
           EmailValueType(v)
-        }).to.throw(TypeError)
+        }).toThrow(TypeError)
       })
     })
     it('should accept valid types', () => {
@@ -58,13 +57,13 @@ describe('EmailValue', () => {
 
   describe('.equals()', () => {
     it('should return true for the same emails', () => {
-      expect(new EmailValue('markus@resourceful-humans.com').equals(new EmailValue('markus@resourceful-humans.com'))).to.equal(true)
+      expect(new EmailValue('markus@resourceful-humans.com').equals(new EmailValue('markus@resourceful-humans.com'))).toEqual(true)
     })
     it('should return true for the same emails (case insensitive)', () => {
-      expect(new EmailValue('Markus@Resourceful-Humans.com').equals(new EmailValue('markus@resourceful-humans.com'))).to.equal(true)
+      expect(new EmailValue('Markus@Resourceful-Humans.com').equals(new EmailValue('markus@resourceful-humans.com'))).toEqual(true)
     })
     it('should return false for different emails', () => {
-      expect(new EmailValue('markus@resourceful-humans.com').equals(new EmailValue('markus@resourceful-humans.de'))).to.equal(false)
+      expect(new EmailValue('markus@resourceful-humans.com').equals(new EmailValue('markus@resourceful-humans.de'))).toEqual(false)
     })
   })
 })

@@ -1,8 +1,7 @@
 import {DomainValue, DomainValueType, MaybeDomainValueType} from '../src'
 import {ValidationFailedError} from '@rheactorjs/errors'
-import {expect} from 'chai'
 
-/* global describe, it */
+/* global describe expect, it */
 /* eslint no-unused-vars: 0 */
 
 describe('DomainValue', () => {
@@ -18,11 +17,11 @@ describe('DomainValue', () => {
         'xn--brger-kva.de' // bürger.de
       ].map(domain => {
         let d = new DomainValue(domain)
-        expect(d.toString()).to.equal(domain.toLowerCase())
+        expect(d.toString()).toEqual(domain.toLowerCase())
       })
     })
 
-    it('should not parse invalid domains', () => {
+    describe('should not parse invalid domains', () => {
       [
         'bogus', // No second level
         'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl.com', //  64 chars
@@ -30,9 +29,11 @@ describe('DomainValue', () => {
         'a-.com', //  trailing dash
         '-a.com' //  leading dash
       ].map(domain => {
-        expect(() => {
-          let d = new DomainValue(domain)
-        }, `It should not parse ${domain} as a domain`).to.throw(ValidationFailedError)
+        it(`It should not parse ${domain} as a domain`, () => {
+          expect(() => {
+            let d = new DomainValue(domain)
+          }).toThrow(ValidationFailedError)
+        })
       })
     })
   })
@@ -46,7 +47,7 @@ describe('DomainValue', () => {
       ].map(v => {
         expect(() => {
           DomainValueType(v)
-        }).to.throw(TypeError)
+        }).toThrow(TypeError)
       })
     })
     it('should accept valid types', () => {
@@ -63,13 +64,13 @@ describe('DomainValue', () => {
 
   describe('.equals()', () => {
     it('should return true for the same domains', () => {
-      expect(new DomainValue('resourceful-humans.com').equals(new DomainValue('resourceful-humans.com'))).to.equal(true)
+      expect(new DomainValue('resourceful-humans.com').equals(new DomainValue('resourceful-humans.com'))).toEqual(true)
     })
     it('should return true for the same domains (acse-insensitive)', () => {
-      expect(new DomainValue('staRHs.example').equals(new DomainValue('starhs.example'))).to.equal(true)
+      expect(new DomainValue('staRHs.example').equals(new DomainValue('starhs.example'))).toEqual(true)
     })
     it('should return false for different domains', () => {
-      expect(new DomainValue('resourceful-humans.com').equals(new DomainValue('resourceful-humans.de'))).to.equal(false)
+      expect(new DomainValue('resourceful-humans.com').equals(new DomainValue('resourceful-humans.de'))).toEqual(false)
     })
   })
 })

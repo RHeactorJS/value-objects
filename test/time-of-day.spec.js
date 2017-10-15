@@ -1,8 +1,7 @@
 import {TimeOfDayValue, TimeOfDayValueType, MaybeTimeOfDayValueType} from '../src'
 import {ValidationFailedError} from '@rheactorjs/errors'
-import {expect} from 'chai'
 
-/* global describe, it */
+/* global describe expect, it */
 /* eslint no-unused-vars: 0 */
 
 describe('TimeOfDayValue', () => {
@@ -21,7 +20,7 @@ describe('TimeOfDayValue', () => {
         '0:00'
       ].map(time => {
         let u = new TimeOfDayValue(time)
-        expect(u.toString()).to.equal(time)
+        expect(u.toString()).toEqual(time)
       })
     })
 
@@ -37,7 +36,7 @@ describe('TimeOfDayValue', () => {
       ].map(time => {
         expect(() => {
           let u = new TimeOfDayValue(time)
-        }).to.throw(ValidationFailedError)
+        }).toThrow(ValidationFailedError)
       })
     })
 
@@ -53,7 +52,7 @@ describe('TimeOfDayValue', () => {
           ['0:00', 0]
         ].map(v => {
           let u = new TimeOfDayValue(v[0])
-          expect(u.hour()).to.equal(v[1])
+          expect(u.hour()).toEqual(v[1])
         })
       })
     })
@@ -66,7 +65,7 @@ describe('TimeOfDayValue', () => {
           ['13:59', 59]
         ].map(v => {
           let u = new TimeOfDayValue(v[0])
-          expect(u.minute()).to.equal(v[1])
+          expect(u.minute()).toEqual(v[1])
         })
       })
     })
@@ -81,7 +80,7 @@ describe('TimeOfDayValue', () => {
       ].map(v => {
         expect(() => {
           TimeOfDayValueType(v)
-        }).to.throw(TypeError)
+        }).toThrow(TypeError)
       })
     })
     it('should accept valid types', () => {
@@ -98,10 +97,10 @@ describe('TimeOfDayValue', () => {
 
   describe('.equals()', () => {
     it('should return true for the same times of day', () => {
-      expect(new TimeOfDayValue('01:00').equals(new TimeOfDayValue('01:00'))).to.equal(true)
+      expect(new TimeOfDayValue('01:00').equals(new TimeOfDayValue('01:00'))).toEqual(true)
     })
     it('should return false for different times of day', () => {
-      expect(new TimeOfDayValue('00:00').equals(new TimeOfDayValue('00:01'))).to.equal(false)
+      expect(new TimeOfDayValue('00:00').equals(new TimeOfDayValue('00:01'))).toEqual(false)
     })
   })
 })
