@@ -30,7 +30,7 @@
     "@rheactorjs/errors": "1.x"
   },
   "devDependencies": {
-    "@commitlint/cli": "^4.2.0",
+    "@commitlint/cli": "^5.0.1",
     "@commitlint/config-angular": "^4.2.0",
     "babel-cli": "^6.18.0",
     "babel-preset-env": "^1.1.1",
