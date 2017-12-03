@@ -18,7 +18,7 @@ describe('TimeOfDayValue', () => {
         '15:00',
         '00:00',
         '0:00'
-      ].map(time => {
+      ].forEach(time => {
         let u = new TimeOfDayValue(time)
         expect(u.toString()).toEqual(time)
       })
@@ -33,7 +33,7 @@ describe('TimeOfDayValue', () => {
         '0:0',
         '13:1',
         '101:00'
-      ].map(time => {
+      ].forEach(time => {
         expect(() => {
           let u = new TimeOfDayValue(time)
         }).toThrow(ValidationFailedError)
@@ -50,7 +50,7 @@ describe('TimeOfDayValue', () => {
           ['2:00', 2],
           ['00:00', 0],
           ['0:00', 0]
-        ].map(v => {
+        ].forEach(v => {
           let u = new TimeOfDayValue(v[0])
           expect(u.hour()).toEqual(v[1])
         })
@@ -63,7 +63,7 @@ describe('TimeOfDayValue', () => {
           ['01:00', 0],
           ['02:01', 1],
           ['13:59', 59]
-        ].map(v => {
+        ].forEach(v => {
           let u = new TimeOfDayValue(v[0])
           expect(u.minute()).toEqual(v[1])
         })
@@ -77,7 +77,7 @@ describe('TimeOfDayValue', () => {
         {foo: 'bar'},
         null,
         undefined
-      ].map(v => {
+      ].forEach(v => {
         expect(() => {
           TimeOfDayValueType(v)
         }).toThrow(TypeError)

@@ -13,7 +13,7 @@ describe('EmailValue', () => {
         'Markus@Resourceful-Humans.com',
         'm@cto.hiv',
         'm@example.co.uk'
-      ].map(email => {
+      ].forEach(email => {
         let d = new EmailValue(email)
         expect(d.toString()).toEqual(email.toLowerCase())
       })
@@ -23,7 +23,7 @@ describe('EmailValue', () => {
       [
         'not a email',
         'm@localhost' // not a second level domain
-      ].map(email => {
+      ].forEach(email => {
         expect(() => {
           let e = new EmailValue(email)
         }).toThrow(ValidationFailedError)
@@ -37,7 +37,7 @@ describe('EmailValue', () => {
         {foo: 'bar'},
         null,
         undefined
-      ].map(v => {
+      ].forEach(v => {
         expect(() => {
           EmailValueType(v)
         }).toThrow(TypeError)

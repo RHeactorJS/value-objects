@@ -24,7 +24,7 @@ const badPercentages = [
 describe('PercentageValue', () => {
   describe('constructor()', () => {
     it('should accept a percentage', () => {
-      goodPercentages.map(data => {
+      goodPercentages.forEach(data => {
         let u = new PercentageValue(data[0])
         expect(u.toString()).toEqual(data[1])
         expect(u.valueOf()).toEqual(typeof data[2] !== 'undefined' ? data[2] : data[0])
@@ -32,7 +32,7 @@ describe('PercentageValue', () => {
     })
 
     describe('should not parse invalid percentages', () => {
-      badPercentages.map(v => {
+      badPercentages.forEach(v => {
         it(JSON.stringify(v) + ' should not be accepted as a valid value', () => {
           expect(() => {
             let u = new PercentageValue(v)
@@ -52,7 +52,7 @@ describe('PercentageValue', () => {
         {foo: 'bar'},
         null,
         undefined
-      ].map(v => {
+      ].forEach(v => {
         expect(() => {
           PercentageValueType(v)
         }).toThrow(TypeError)
@@ -81,10 +81,10 @@ describe('PercentageValue', () => {
 
   describe('stringIs()', () => {
     it('should accept good percentages as strings', () => {
-      goodPercentages.map(percentage => expect(PercentageValue.stringIs(percentage[1], `${percentage[1]} should be accepted`)).toEqual(true))
+      goodPercentages.forEach(percentage => expect(PercentageValue.stringIs(percentage[1], `${percentage[1]} should be accepted`)).toEqual(true))
     })
     it('should not accept bad percentages as strings', () => {
-      badPercentages.map(percentage => expect(PercentageValue.stringIs(percentage, `${percentage[1]} should not be accepted`)).toEqual(false))
+      badPercentages.forEach(percentage => expect(PercentageValue.stringIs(percentage, `${percentage[1]} should not be accepted`)).toEqual(false))
     })
   })
 })

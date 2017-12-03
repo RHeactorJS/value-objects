@@ -15,7 +15,7 @@ describe('DomainValue', () => {
         'r-h.com', // with dash
         'xn--mgb9awbf6b.xn--4gbrim', // عُمان.موقع (oman.site)
         'xn--brger-kva.de' // bürger.de
-      ].map(domain => {
+      ].forEach(domain => {
         let d = new DomainValue(domain)
         expect(d.toString()).toEqual(domain.toLowerCase())
       })
@@ -28,7 +28,7 @@ describe('DomainValue', () => {
         'www.example.com', //  subdomain
         'a-.com', //  trailing dash
         '-a.com' //  leading dash
-      ].map(domain => {
+      ].forEach(domain => {
         it(`It should not parse ${domain} as a domain`, () => {
           expect(() => {
             let d = new DomainValue(domain)
@@ -44,7 +44,7 @@ describe('DomainValue', () => {
         {foo: 'bar'},
         null,
         undefined
-      ].map(v => {
+      ].forEach(v => {
         expect(() => {
           DomainValueType(v)
         }).toThrow(TypeError)

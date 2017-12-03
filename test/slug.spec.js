@@ -10,7 +10,7 @@ describe('SlugValue', () => {
       [
         'some-slug',
         'short'
-      ].map(slug => {
+      ].forEach(slug => {
         let d = new SlugValue(slug)
         expect(d.toString()).toEqual(slug)
       })
@@ -23,7 +23,7 @@ describe('SlugValue', () => {
         'a--',        //  trailing dash
         '-a',         //  leading dash
         '--a'         //  leading dash
-      ].map(slug => {
+      ].forEach(slug => {
         expect(() => {
           let s = new SlugValue(slug)
         }).toThrow(ValidationFailedError)
@@ -37,7 +37,7 @@ describe('SlugValue', () => {
         {foo: 'bar'},
         null,
         undefined
-      ].map(v => {
+      ].forEach(v => {
         expect(() => {
           SlugValueType(v)
         }).toThrow(TypeError)

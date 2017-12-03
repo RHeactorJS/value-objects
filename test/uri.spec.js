@@ -100,14 +100,14 @@ const badURIs = [
 describe('URIValue', () => {
   describe('constructor()', function () {
     it('should parse a URI', () => {
-      goodURIs.map(uri => {
+      goodURIs.forEach(uri => {
         let u = new URIValue(uri)
         expect(u.toString()).toEqual(uri)
       })
     })
 
     describe('should not parse invalid URIs', () => {
-      badURIs.map(uri => {
+      badURIs.forEach(uri => {
         test(`this should be an invalid URI: "${uri}"`, () => {
           expect(() => {
             let u = new URIValue(uri)
@@ -129,7 +129,7 @@ describe('URIValue', () => {
         {foo: 'bar'},
         null,
         undefined
-      ].map(v => {
+      ].forEach(v => {
         expect(() => {
           URIValueType(v)
         }).toThrow(TypeError)
@@ -158,10 +158,10 @@ describe('URIValue', () => {
 
   describe('stringIs()', () => {
     it('should accept good URIs as strings', () => {
-      goodURIs.map(uri => expect(URIValue.stringIs(uri)).toEqual(true))
+      goodURIs.forEach(uri => expect(URIValue.stringIs(uri)).toEqual(true))
     })
     it('should not accept bad URIs as strings', () => {
-      badURIs.map(uri => expect(URIValue.stringIs(uri)).toEqual(false))
+      badURIs.forEach(uri => expect(URIValue.stringIs(uri)).toEqual(false))
     })
   })
 
