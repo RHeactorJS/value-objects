@@ -19,10 +19,10 @@ describe('SlugValue', () => {
     it('should not parse invalid slugs', () => {
       [
         'not a slug',
-        'a-',         //  trailing dash
-        'a--',        //  trailing dash
-        '-a',         //  leading dash
-        '--a'         //  leading dash
+        'a-', //  trailing dash
+        'a--', //  trailing dash
+        '-a', //  leading dash
+        '--a' //  leading dash
       ].forEach(slug => {
         expect(() => {
           let s = new SlugValue(slug)
